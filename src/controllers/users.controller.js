@@ -1,5 +1,6 @@
 // const { request, response } = require("express")
 const userModel = require("../models/users.model")
+const errrorHendle = require("../helpers/errorHandler")
 
 exports.getAllUsers = async (request,response)=>{
     const data = await userModel.findAll()
@@ -11,12 +12,16 @@ exports.getAllUsers = async (request,response)=>{
 }
 
 exports.createUser = async (request, response)=>{
-    const data = await userModel.insert(request.body)  
-    return response.json({
-        success: true,
-        masssage: `create user ${request.body.email} successfuly`,
-        result: data
-    })
+    try{
+        const data = await userModel.insert(request.body)  
+        return response.json({
+            success: true,
+            masssage: `create user ${request.body.email} successfuly`,
+            result: data
+        })
+    }catch(error){
+        return errrorHendle(response, error)
+    }
 }
 
 exports.updateUser = async(request, response)=>{
@@ -38,18 +43,18 @@ exports.getOneUser = async (request,response)=>{
             results: data
         })
     }
-    return response.status(404).json({
-        success: false,
-        massage: "Error user not found",
-    })
+    errrorHendle(response, data)
 }
 
 exports.deleteUser = async (request,response)=>{
     const data = await userModel.destroy(request.params.id)
-    return response.json({
-        success: true,
-        massage: "Delete user successfully",
-        results: data
-    })
+    if(data){
+        return response.json({
+            success: true,
+            massage: "Delete user successfully",
+            results: data
+        })
+    }
+    errrorHendle(response, data)
 }
 
