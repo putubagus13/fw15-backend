@@ -28,11 +28,11 @@ exports.insert = async function(data){
 
 exports.update = async function(id, data){
     const query = `
-  UPDATE "users" 
-  SET "email"=$2, 
-  "password"=$3 WHERE "id"=$1
-  RETURNING *
-  `
+    UPDATE "users" 
+    SET "email"=$2, 
+    "password"=$3 WHERE "id"=$1
+    RETURNING *
+    `
     const values = [id, data.email, data.password]
     const {rows} = await db.query(query, values)
     return rows[0]

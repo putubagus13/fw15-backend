@@ -1,0 +1,365 @@
+<mxfile host="app.diagrams.net" modified="2023-04-09T17:22:21.708Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="QuySeuo4duHx3-l7t0hh" version="21.1.5" type="device">
+  <diagram name="Page-1" id="Gda8aAcoX1wLqmAGTbfG">
+    <mxGraphModel dx="1744" dy="947" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-1" value="&lt;b&gt;CREATE USERS&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="25" y="50" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-2" target="YaDRh54AtRM1BTjT_YsA-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-2" value="&lt;b&gt;Start&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="270" y="90" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-3" target="YaDRh54AtRM1BTjT_YsA-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-3" value="&lt;b&gt;Input&lt;/b&gt;&lt;br&gt;(Email, Password)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="225" y="170" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BeeldSdNCk5eu46JR7qN-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="YaDRh54AtRM1BTjT_YsA-4" target="YaDRh54AtRM1BTjT_YsA-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-4" value="&lt;b&gt;&lt;br&gt;&lt;/b&gt;INSERT INTO &quot;users&quot; (&quot;email&quot;, &quot;password&quot;)&lt;br&gt;    VALUES ($1, $2) RETURNING *&lt;br&gt;    `&lt;b&gt;&lt;br&gt;values &lt;/b&gt;= [data.email, data.password]&lt;br&gt;&lt;b&gt;{rows}&lt;/b&gt; = await db.query(query, values)" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="205" y="254" width="250" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-5" target="YaDRh54AtRM1BTjT_YsA-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-5" target="YaDRh54AtRM1BTjT_YsA-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-5" value="&lt;b&gt;send/ Execute&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="250" y="386" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-7" target="YaDRh54AtRM1BTjT_YsA-27" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-7" value="&lt;b&gt;Respons.json()&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;success&lt;/b&gt;: true,&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;masssage&lt;/b&gt;: `create user ${request.body.email} successfuly`,&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;result&lt;/b&gt;: data&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="187.5" y="590" width="285" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-14" value="&lt;b&gt;True&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="270" y="546" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-15" value="&lt;b&gt;error&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="460" y="430" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-18" target="YaDRh54AtRM1BTjT_YsA-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-18" target="YaDRh54AtRM1BTjT_YsA-24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-18" value="&lt;b&gt;Error Hendel&lt;/b&gt;&lt;br&gt;&lt;b&gt;if&lt;/b&gt;(error?.massage?&lt;br&gt;.inculudes&lt;br&gt;(&quot;duplicate key&quot;))" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="590" y="386" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-19" target="YaDRh54AtRM1BTjT_YsA-29" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="670" y="810" />
+              <mxPoint x="330" y="810" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-19" value="&lt;b&gt;masssage:&lt;/b&gt; &quot;Error email already used!&quot;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="572.5" y="590" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-22" value="&lt;b&gt;True&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="600" y="546" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-24" target="YaDRh54AtRM1BTjT_YsA-29" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="888" y="810" />
+              <mxPoint x="330" y="810" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-24" value="&lt;b&gt;massage: &lt;/b&gt;&quot;Error: Intenal server error&quot;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="790" y="590" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-27" target="YaDRh54AtRM1BTjT_YsA-29" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-27" value="&lt;b&gt;Data base users&lt;/b&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="225" y="740" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-29" value="&lt;b&gt;Finish&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="270" y="830" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-33" value="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;FLOW CHART&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-59" target="YaDRh54AtRM1BTjT_YsA-61" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-59" value="&lt;b&gt;Start&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="258.5" y="1070" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-61" target="YaDRh54AtRM1BTjT_YsA-63" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-61" value="&lt;b&gt;Input&lt;/b&gt;&lt;br&gt;(id)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="213.5" y="1150" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-63" target="YaDRh54AtRM1BTjT_YsA-66" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-63" value="SELECT * FROM &quot;users&quot; WHERE id=$1`&lt;br&gt;&lt;b&gt;values &lt;/b&gt;= [id]&lt;br&gt;&lt;b&gt;{rows}&lt;/b&gt; = await db.query(query, values)" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="193.5" y="1234" width="250" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-66" target="YaDRh54AtRM1BTjT_YsA-68" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-66" target="YaDRh54AtRM1BTjT_YsA-73" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-66" value="&lt;b&gt;send/ Execute&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="238.5" y="1336" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-68" target="YaDRh54AtRM1BTjT_YsA-80" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-68" value="&lt;b&gt;Respons.json()&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;success&lt;/b&gt;: true,&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;masssage&lt;/b&gt;:&amp;nbsp;&quot;Detail users&quot;&lt;span style=&quot;background-color: initial;&quot;&gt;,&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;result&lt;/b&gt;: data&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="176" y="1540" width="285" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-69" value="&lt;b&gt;True&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="258.5" y="1496" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-70" value="&lt;b&gt;error&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="448.5" y="1380" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-73" target="YaDRh54AtRM1BTjT_YsA-75" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-73" target="YaDRh54AtRM1BTjT_YsA-78" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-73" value="&lt;b&gt;Error Hendel&lt;/b&gt;&lt;br&gt;&lt;b&gt;if&lt;/b&gt;(error === undefined){" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="578.5" y="1336" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-75" target="YaDRh54AtRM1BTjT_YsA-81" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="658.5" y="1760" />
+              <mxPoint x="318.5" y="1760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-75" value="&lt;b&gt;masssage:&lt;/b&gt;&amp;nbsp;&quot;Error: user not found&quot;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="561" y="1540" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-76" value="&lt;b&gt;True&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="588.5" y="1496" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-77" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-78" target="YaDRh54AtRM1BTjT_YsA-81" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="876.5" y="1760" />
+              <mxPoint x="318.5" y="1760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-78" value="&lt;b&gt;massage: &lt;/b&gt;&quot;Error: Intenal server error&quot;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="778.5" y="1540" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-80" target="YaDRh54AtRM1BTjT_YsA-81" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-80" value="&lt;b&gt;Show data user&lt;/b&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="213.5" y="1690" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-81" value="&lt;b&gt;Finish&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="258.5" y="1780" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-82" value="&lt;b&gt;READ&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="110" y="1010" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-85" target="YaDRh54AtRM1BTjT_YsA-87" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-85" value="&lt;b&gt;Start&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="278.5" y="3010" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-87" target="YaDRh54AtRM1BTjT_YsA-89" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-87" value="&lt;b&gt;Input&lt;/b&gt;&lt;br&gt;(id)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="233.5" y="3090" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-89" target="YaDRh54AtRM1BTjT_YsA-92" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-89" value="&lt;b&gt;exports.destroy&lt;/b&gt;&lt;br&gt;DELETE FROM &quot;users&quot; WHERE &quot;id&quot;=$1`&lt;br&gt;&lt;b&gt;values &lt;/b&gt;= [id]&lt;br&gt;&lt;b&gt;{rows}&lt;/b&gt; = await db.query(query, values)" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="213.5" y="3174" width="250" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-92" target="YaDRh54AtRM1BTjT_YsA-94" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-91" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-92" target="YaDRh54AtRM1BTjT_YsA-99" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-92" value="&lt;b&gt;send/ Execute&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="258.5" y="3276" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-94" target="YaDRh54AtRM1BTjT_YsA-106" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-94" value="&lt;b&gt;Respons.json()&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;success&lt;/b&gt;: true,&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;masssage&lt;/b&gt;:&amp;nbsp;&quot;Delete user successfully&quot;&lt;span style=&quot;background-color: initial;&quot;&gt;,&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;result&lt;/b&gt;: data&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="196" y="3480" width="285" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-95" value="&lt;b&gt;True&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="278.5" y="3436" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-96" value="&lt;b&gt;error&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="468.5" y="3320" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-97" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-99" target="YaDRh54AtRM1BTjT_YsA-101" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-98" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-99" target="YaDRh54AtRM1BTjT_YsA-104" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-99" value="&lt;b&gt;Error Hendel&lt;/b&gt;&lt;br&gt;&lt;b&gt;if&lt;/b&gt;(error === undefined){" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="598.5" y="3276" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-100" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-101" target="YaDRh54AtRM1BTjT_YsA-107" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="678.5" y="3700" />
+              <mxPoint x="338.5" y="3700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-101" value="&lt;b&gt;masssage:&lt;/b&gt;&amp;nbsp;&quot;Error: user not found&quot;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="581" y="3480" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-102" value="&lt;b&gt;True&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="608.5" y="3436" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-103" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-104" target="YaDRh54AtRM1BTjT_YsA-107" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="896.5" y="3700" />
+              <mxPoint x="338.5" y="3700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-104" value="&lt;b&gt;massage: &lt;/b&gt;&quot;Error: Intenal server error&quot;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="798.5" y="3480" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-106" target="YaDRh54AtRM1BTjT_YsA-107" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-106" value="&lt;b&gt;user not found&lt;/b&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="233.5" y="3630" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-107" value="&lt;b&gt;Finish&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="278.5" y="3720" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-108" value="&lt;b&gt;DELETE&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="130" y="2950" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-109" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-110" target="YaDRh54AtRM1BTjT_YsA-112" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-110" value="&lt;b&gt;Start&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="288.5" y="1970" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-111" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-112" target="YaDRh54AtRM1BTjT_YsA-114" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-112" value="&lt;b&gt;Input&lt;/b&gt;&lt;br&gt;(id, email, password)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="243.5" y="2050" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-113" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-114" target="YaDRh54AtRM1BTjT_YsA-117" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-114" value="&lt;b&gt;exports.destroy&lt;/b&gt;&lt;br&gt;&lt;div&gt;UPDATE &quot;users&quot;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; SET &quot;email&quot;=$2,&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &quot;password&quot;=$3 WHERE &quot;id&quot;=$1&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; RETURNING *&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; `&lt;/div&gt;&lt;b&gt;values &lt;/b&gt;=&amp;nbsp;[id, data.email, data.password]&lt;br&gt;&lt;b&gt;{rows}&lt;/b&gt; = await db.query(query, values)" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="223.5" y="2134" width="250" height="147" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-115" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-117" target="YaDRh54AtRM1BTjT_YsA-119" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-116" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-117" target="YaDRh54AtRM1BTjT_YsA-124" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-117" value="&lt;b&gt;send/ Execute&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="268.5" y="2325" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-118" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-119" target="YaDRh54AtRM1BTjT_YsA-131" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-119" value="&lt;b&gt;Respons.json()&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;success&lt;/b&gt;: true,&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;masssage&lt;/b&gt;:&amp;nbsp;&quot;Update user successfully&quot;&lt;span style=&quot;background-color: initial;&quot;&gt;,&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;result&lt;/b&gt;: data&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="206" y="2529" width="285" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-120" value="&lt;b&gt;True&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="288.5" y="2485" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-121" value="&lt;b&gt;error&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="491" y="2370" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-122" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-124" target="YaDRh54AtRM1BTjT_YsA-126" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-123" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-124" target="YaDRh54AtRM1BTjT_YsA-129" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-124" value="&lt;b&gt;Error Hendel&lt;/b&gt;&lt;br&gt;&lt;b&gt;if&lt;/b&gt;(error === undefined){" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="608.5" y="2325" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-125" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-126" target="YaDRh54AtRM1BTjT_YsA-132" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="688.5" y="2749" />
+              <mxPoint x="348.5" y="2749" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-126" value="&lt;b&gt;masssage:&lt;/b&gt;&amp;nbsp;&quot;Error: user not found&quot;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="591" y="2529" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-127" value="&lt;b&gt;True&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="618.5" y="2485" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-128" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-129" target="YaDRh54AtRM1BTjT_YsA-132" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="906.5" y="2749" />
+              <mxPoint x="348.5" y="2749" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-129" value="&lt;b&gt;massage: &lt;/b&gt;&quot;Error: Intenal server error&quot;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="808.5" y="2529" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-130" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="YaDRh54AtRM1BTjT_YsA-131" target="YaDRh54AtRM1BTjT_YsA-132" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-131" value="&lt;b&gt;user not found&lt;/b&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="243.5" y="2679" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-132" value="&lt;b&gt;Finish&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="288.5" y="2769" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-133" value="&lt;b&gt;UPDATE&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="168.5" y="1940" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YaDRh54AtRM1BTjT_YsA-134" value="&lt;h1&gt;Deskriptif&lt;/h1&gt;&lt;p&gt;1.&lt;span style=&quot;&quot;&gt;	&lt;span style=&quot;&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Program dimulai&lt;/p&gt;&lt;p&gt;2.&lt;span style=&quot;&quot;&gt;	&lt;span style=&quot;&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Memasukkan input berupa email dan password pada colection atau query&lt;/p&gt;3.&lt;span style=&quot;&quot;&gt;	&lt;/span&gt;Memasukan data input dengan menngunakan query yaitu INSERT INTO yangakan memasukkan baris baru ke dalam tabel &quot;users&quot; dengan nilai email dan password yang sesuai.&amp;nbsp;&lt;br&gt;&lt;br&gt;4.&amp;nbsp;&lt;b&gt;values &lt;/b&gt;akan menampung data berupa email dan password yang diambil dari objet data dalam bentuk array.&lt;br&gt;&lt;br&gt;5. data disend (pada postman) atau di execute pada query&lt;br&gt;&lt;br&gt;6. Jika behasil maka akan dikirimkan response berupa json pada body dengan s&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;uccess:&amp;nbsp;&lt;/b&gt;true,&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;masssage&lt;/b&gt;: `create user (nama email user) successfuly` dan menampilkan variabel data yang berisi email dan password.&lt;br&gt;&lt;br&gt;7. Jika email sudah pernah di input maka akan masuk ke kondisi error dan akan merespon berupa respon.json yang berisi s&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;uccess:&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;false&lt;/span&gt;,&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;masssage:&lt;/b&gt;&amp;nbsp;&quot;Error email already used!&quot;. dan selain itu maka respon yang diberikan berupa&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;massage:&amp;nbsp;&lt;/b&gt;&quot;Error: Intenal server error&quot;.&lt;br&gt;&lt;br&gt;8. Selesai&lt;br&gt;&lt;br&gt;&amp;nbsp;&lt;br&gt;&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="980" y="120" width="460" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="BeeldSdNCk5eu46JR7qN-3" value="&lt;h1&gt;Deskriptif&lt;/h1&gt;&lt;p&gt;1.&lt;span style=&quot;&quot;&gt;	&lt;span style=&quot;&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Program dimulai&lt;/p&gt;&lt;p&gt;2.&lt;span style=&quot;&quot;&gt;	&lt;span style=&quot;&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Memasukkan input berupa id user pada colection atau query&lt;/p&gt;3.&lt;span style=&quot;&quot;&gt;&amp;nbsp;input tesebut akan digunakan untuk mencai data user dengan &lt;/span&gt;menngunakan query yaitu&amp;nbsp; SELECT yang akan menseleksi pada tabel users.&amp;nbsp;&lt;br&gt;&lt;br&gt;4.&amp;nbsp;&lt;b&gt;values &lt;/b&gt;akan menampung data berupa id yang diambil dari objet data dalam bentuk array.&lt;br&gt;&lt;br&gt;5. id disend (pada postman) atau di execute pada query&lt;br&gt;&lt;br&gt;6. Jika behasil maka akan dikirimkan response berupa json pada body dengan &lt;b&gt;Success: &lt;/b&gt;true,&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;masssage&lt;/b&gt;: `Detail user` dan menampilkan variabel data yang berisi email dan password.&lt;br&gt;&lt;br&gt;7. Jika id tidak ditemukan maka data memiliki velue undefined dan masuk ke kondisi error dan akan merespon berupa respon.json yang berisi&amp;nbsp;&lt;b&gt;success:&amp;nbsp;&lt;/b&gt;false,&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;masssage:&lt;/b&gt;&amp;nbsp;&quot;Error: user not found!&quot;. dan selain itu maka respon yang diberikan berupa&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;massage:&amp;nbsp;&lt;/b&gt;&quot;Error: Intenal server error&quot;.&lt;br&gt;&lt;br&gt;8. Selesai&lt;br&gt;&lt;br&gt;&amp;nbsp;&lt;br&gt;&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="1040" width="460" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="BeeldSdNCk5eu46JR7qN-4" value="&lt;h1&gt;Deskriptif&lt;/h1&gt;&lt;p&gt;1.&lt;span style=&quot;&quot;&gt;	&lt;span style=&quot;&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Program dimulai&lt;/p&gt;&lt;p&gt;2.&lt;span style=&quot;&quot;&gt;	&lt;span style=&quot;&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Memasukkan input berupa id, email(update), dan password(update) pada colection atau query&lt;/p&gt;3.&lt;span style=&quot;&quot;&gt;&amp;nbsp;input id akan digunakan untuk mencai data user dengan &lt;/span&gt;menngunakan query yaitu&amp;nbsp; UPDATE yang akan menseleksi pada tabel users yang kemudian akan menset email dan password baru.&lt;br&gt;&lt;br&gt;4.&amp;nbsp;&lt;b&gt;values &lt;/b&gt;akan menampung data berupa id, email dan password yang diambil dari objet data dalam bentuk array.&lt;br&gt;&lt;br&gt;5. input kemudian disend (pada postman) atau di execute pada query&lt;br&gt;&lt;br&gt;6. Jika behasil maka akan dikirimkan response berupa json pada body dengan &lt;b&gt;Success: &lt;/b&gt;true,&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;masssage&lt;/b&gt;:&amp;nbsp;&quot;Update user successfully&quot; dan menampilkan variabel data yang berisi email dan password yang telah diupdate.&lt;br&gt;&lt;br&gt;7. Jika id tidak ditemukan maka data memiliki velue undefined dan masuk ke kondisi error dan akan merespon berupa respon.json yang berisi&amp;nbsp;&lt;b&gt;success:&amp;nbsp;&lt;/b&gt;false,&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;masssage:&lt;/b&gt;&amp;nbsp;&quot;Error: user not found!&quot;. dan selain itu maka respon yang diberikan berupa&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;massage:&amp;nbsp;&lt;/b&gt;&quot;Error: Intenal server error&quot;.&lt;br&gt;&lt;br&gt;8. Selesai&lt;br&gt;&lt;br&gt;&amp;nbsp;&lt;br&gt;&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1003.5" y="2007.5" width="460" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="BeeldSdNCk5eu46JR7qN-5" value="&lt;h1&gt;Deskriptif&lt;/h1&gt;&lt;p&gt;1.&lt;span style=&quot;&quot;&gt;	&lt;span style=&quot;&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Program dimulai&lt;/p&gt;&lt;p&gt;2.&lt;span style=&quot;&quot;&gt;	&lt;span style=&quot;&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Memasukkan input berupa id user pada colection atau query&lt;/p&gt;3.&lt;span style=&quot;&quot;&gt;&amp;nbsp;Dengan &lt;/span&gt;menngunakan query yaitu DELETE FROM maka data user akan dihapus dengan bedasarkan id yang sesuai.&lt;br&gt;&lt;br&gt;4.&amp;nbsp;&lt;b&gt;values &lt;/b&gt;akan menampung data berupa id yang diambil dari objet data dalam bentuk array.&lt;br&gt;&lt;br&gt;5. input kemudian disend (pada postman) atau di execute pada query&lt;br&gt;&lt;br&gt;6. Jika behasil maka akan dikirimkan response berupa json pada body dengan &lt;b&gt;Success: &lt;/b&gt;true,&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;masssage&lt;/b&gt;:&amp;nbsp;&quot;Delete user successfully&quot;.&lt;br&gt;&lt;br&gt;7. Jika id tidak ditemukan maka data memiliki velue undefined dan masuk ke kondisi error dan akan merespon berupa respon.json yang berisi&amp;nbsp;&lt;b&gt;success:&amp;nbsp;&lt;/b&gt;false,&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;masssage:&lt;/b&gt;&amp;nbsp;&quot;Error: user not found!&quot;. dan selain itu maka respon yang diberikan berupa&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); text-align: center;&quot;&gt;massage:&amp;nbsp;&lt;/b&gt;&quot;Error: Intenal server error&quot;.&lt;br&gt;&lt;br&gt;8. Selesai&lt;br&gt;&lt;br&gt;&amp;nbsp;&lt;br&gt;&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="3110" width="460" height="400" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

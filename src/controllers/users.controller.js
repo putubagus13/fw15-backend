@@ -26,11 +26,14 @@ exports.createUser = async (request, response)=>{
 
 exports.updateUser = async(request, response)=>{
     const data= await userModel.update(request.params.id, request.body)
-    return response.json({
-        success: true,
-        massage: "Update user successfully",
-        results: data
-    })
+    if(data){
+        return response.json({
+            success: true,
+            massage: "Update user successfully",
+            results: data
+        })
+    }
+    errrorHendle(response, data)
 }
  
 
