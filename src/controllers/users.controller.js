@@ -13,7 +13,34 @@ exports.getAllUsers = async (request,response)=>{
 
 exports.createUser = async (request, response)=>{
     try{
-        const data = await userModel.insert(request.body)  
+        if(request.body.email === "" || request.body.password ==="" ||request.body.name ===""){
+            // throw Error("empty_faild")
+            return response.status(400).json({
+                success: false,
+                massage: "Error: Name, Email or Password cant be empty"  
+            })
+        }
+        if(!request.body.email.includes("@")){
+            //throw Error("format_wrong")
+            return response.status(400).json({
+                success: false,
+                massage: "Error: Email format is wrong"
+            })
+        }
+        if(request.body.password.length < 8){
+            return response.status(400).json({
+                success: false,
+                massage: "Password must have 8 caracter"
+            })
+        }
+
+        if(!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/g.test(request.body.password)){
+            return response.status(400).json({
+                success: false,
+                massage: "Enter numbers, uppercase and lowercase letters for the password"
+            })
+        }
+        const data = await userModel.insert(request.body)
         return response.json({
             success: true,
             masssage: `create user ${request.body.email} successfuly`,
