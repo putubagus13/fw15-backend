@@ -3,18 +3,28 @@ const userModel = require("../models/users.model")
 const errrorHendle = require("../helpers/errorHandler")
 
 exports.getAllUsers = async (request,response)=>{
-    const data = await userModel.findAll()
-    return response.json({
-        success: true,
-        massage: "List of all users",
-        results: data
-    })
+    try {
+        const data = await userModel.findAll(
+            request.query.page, 
+            request.query.limit, 
+            request.query.search, 
+            request.query.sort, 
+            request.query.sortBy)
+
+        return response.json({
+            success: true,
+            massage: "List of all users",
+            results: data
+        })
+    } catch (error) {
+        return errrorHendle(response, error)
+    }
 }
 
 exports.createUser = async (request, response)=>{
     try{
         if(request.body.email === "" || request.body.password ==="" ||request.body.name ===""){
-            // throw Error("empty_faild")
+            //throw Error("empty_faild")
             return response.status(400).json({
                 success: false,
                 massage: "Error: Name, Email or Password cant be empty"  
