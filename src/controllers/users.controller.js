@@ -1,6 +1,7 @@
 // const { request, response } = require("express")
 const userModel = require("../models/users.model")
 const errrorHendle = require("../helpers/errorHandler")
+const argon = require("argon2")
 
 exports.getAllUsers = async (request,response)=>{
     try {
@@ -50,11 +51,16 @@ exports.createUser = async (request, response)=>{
                 massage: "Enter numbers, uppercase and lowercase letters for the password"
             })
         }
-        const data = await userModel.insert(request.body)
+        const hash = await argon.hash(request.body.password)
+        const data = {
+            ...request.body,
+            password: hash
+        }
+        const user = await userModel.insert(data)
         return response.json({
             success: true,
             masssage: `create user ${request.body.email} successfuly`,
-            result: data
+            result: user
         })
     }catch(error){
         return errrorHendle(response, error)

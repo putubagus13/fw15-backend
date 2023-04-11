@@ -8,7 +8,11 @@ exports.login = async (request, response)=>{
     try {
         const {email, password} = request.body
         const user = await userModel.findOneByEmail(email)
-        if(!user || (password !== user?.password)){
+        if(!user){
+            throw Error("wrong_credentials")
+        }
+        const verify = argon.verify(user.password, password)
+        if(!verify){
             throw Error("wrong_credentials")
         }
         const token = jwt.sign({id:user.id}, APP_SECRET)
@@ -34,10 +38,34 @@ exports.register = async (request, response)=>{
             password: hash
         }
         const user = await userModel.insert(data)
-        const token = jwt.sign({id:user.id}, APP_SECRET)
+        const token = jwt.sign({id: user.id}, APP_SECRET)
         return response.json({
             success: true,
             message: "Register Success!",
+            results: (token)
+        })
+    } catch (error) {
+        return errrorHendle(response,error)
+    }
+}
+
+exports.update = async (request, response)=>{
+    try {
+        // const {id} = request.params.id
+        const {password}= request.body
+        // if(!id){
+        //     throw Error("update_failed")
+        // }
+        const hash = await argon.hash(password)
+        const data = {
+            ...request.body,
+            password: hash
+        }
+        const user = await userModel.update(request.params.id, data)
+        const token = jwt.sign({id: user.id}, APP_SECRET)
+        return response.json({
+            success: true,
+            message: "Update Success!",
             results: (token)
         })
     } catch (error) {
