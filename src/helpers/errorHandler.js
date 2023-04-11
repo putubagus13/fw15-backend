@@ -55,9 +55,16 @@ const errrorHendle = (response, error)=>{
     }
 
     if(error?.message?.includes("password_unmatch")){
-        return response.status(400).json({
+        return response.status(401).json({
             success: false,
             message: "Password and confirm passwod unmatch"
+        })
+    }
+
+    if(error?.message?.includes("update_failed")){
+        return response.status(400).json({
+            success: false,
+            message: "Error: user not found!"
         })
     }
 
