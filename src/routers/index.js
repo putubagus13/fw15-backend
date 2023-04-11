@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const authMiddleweres = require("../middlewares/auth.middlewere")
 
 router.get("/", (request, response)=>{
     return response.json({
@@ -7,7 +8,9 @@ router.get("/", (request, response)=>{
     })
 })
 
-router.use("/admin", require("./admin.router"))
+router.use("/auth", require("./auth.router"))
+router.use("/admin",authMiddleweres, require("./admin.router"))
+
 
 router.use("*", (request,response)=>{
     return response.status(404).json({

@@ -24,18 +24,18 @@ exports.getAllUsers = async (request,response)=>{
 exports.createUser = async (request, response)=>{
     try{
         if(request.body.email === "" || request.body.password ==="" ||request.body.name ===""){
-            //throw Error("empty_faild")
-            return response.status(400).json({
-                success: false,
-                massage: "Error: Name, Email or Password cant be empty"  
-            })
+            throw Error("empty_failed")
+            // return response.status(400).json({
+            //     success: false,
+            //     massage: "Error: Name, Email or Password cant be empty"  
+            // })
         }
         if(!request.body.email.includes("@")){
-            //throw Error("format_wrong")
-            return response.status(400).json({
-                success: false,
-                massage: "Error: Email format is wrong"
-            })
+            throw Error("format_wrong")
+            // return response.status(400).json({
+            //     success: false,
+            //     massage: "Error: Email format is wrong"
+            // })
         }
         if(request.body.password.length < 8){
             return response.status(400).json({

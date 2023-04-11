@@ -1,35 +1,70 @@
 const errrorHendle = (response, error)=>{
-    if(error?.massage?.inculudes("duplicate key")){
+    if(error?.message?.includes("duplicate key")){
         return response.status(409).json({
             success: false,
-            masssage: "Error email already used!"
+            message: "Error email already used!"
         })
     }
-    // if(error?.massage?.inculudes("empty_faild")){
-    //     return response.status(400).json({
-    //         success: false,
-    //         massage: "Error: Email or Password cant be empty"
-    //     })
-    // }
+    if(error?.message?.includes("empty_failed")){
+        return response.status(400).json({
+            success: false,
+            message: "Error: Email or Password cant be empty"
+        })
+    }
 
-    // if(error?.massage?.inculudes("format_wrong")){
-    //     return response.status(400).json({
-    //         success: false,
-    //         massage: "Error: Email wrong!"
-    //     })
-    // }
+    if(error?.message?.includes("format_wrong")){
+        return response.status(400).json({
+            success: false,
+            message: "Error: Email wrong!"
+        })
+    }
 
     if(error === undefined){
         return response.status(404).json({
             success: false,
-            massage: "Error: user not found"
+            message: "Error: user not found"
+        })
+    }
+
+    if(error?.message?.includes("wrong_credentials")){
+        return response.status(400).json({
+            success: false,
+            message: "Error: email or password is wrong!"
+        })
+    }
+
+    if(error?.message?.includes("unauthorized")){
+        return response.status(400).json({
+            success: false,
+            message: "Error: authorization is failed!"
+        })
+    }
+
+    if(error?.message?.includes("jwt malformed")){
+        return response.status(401).json({
+            success: false,
+            message: "Token invalid!"
+        })
+    }
+
+    if(error?.message?.includes("invalid signature")){
+        return response.status(401).json({
+            success: false,
+            message: "Token signature is invalid!"
+        })
+    }
+
+    if(error?.message?.includes("password_unmatch")){
+        return response.status(400).json({
+            success: false,
+            message: "Password and confirm passwod unmatch"
         })
     }
 
     console.log(error)
     return response.status(500).json({
         success: false,
-        massage: "Error: Intenal server error"
+        message: "Error: Intenal server error"
     })
 }
 
