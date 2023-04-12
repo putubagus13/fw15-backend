@@ -24,37 +24,40 @@ exports.getAllUsers = async (request,response)=>{
 
 exports.createUser = async (request, response)=>{
     try{
-        if(request.body.email === "" || request.body.password ==="" ||request.body.name ===""){
-            throw Error("empty_failed")
-            // return response.status(400).json({
-            //     success: false,
-            //     massage: "Error: Name, Email or Password cant be empty"  
-            // })
-        }
-        if(!request.body.email.includes("@")){
-            throw Error("format_wrong")
-            // return response.status(400).json({
-            //     success: false,
-            //     massage: "Error: Email format is wrong"
-            // })
-        }
-        if(request.body.password.length < 8){
-            return response.status(400).json({
-                success: false,
-                massage: "Password must have 8 caracter"
-            })
-        }
+        // if(request.body.email === "" || request.body.password ==="" ||request.body.name ===""){
+        //     throw Error("empty_failed")
+        //     // return response.status(400).json({
+        //     //     success: false,
+        //     //     massage: "Error: Name, Email or Password cant be empty"  
+        //     // })
+        // }
+        // if(!request.body.email.includes("@")){
+        //     throw Error("format_wrong")
+        //     // return response.status(400).json({
+        //     //     success: false,
+        //     //     massage: "Error: Email format is wrong"
+        //     // })
+        // }
+        // if(request.body.password.length < 8){
+        //     return response.status(400).json({
+        //         success: false,
+        //         massage: "Password must have 8 caracter"
+        //     })
+        // }
 
-        if(!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/g.test(request.body.password)){
-            return response.status(400).json({
-                success: false,
-                massage: "Enter numbers, uppercase and lowercase letters for the password"
-            })
-        }
+        // if(!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/g.test(request.body.password)){
+        //     return response.status(400).json({
+        //         success: false,
+        //         massage: "Enter numbers, uppercase and lowercase letters for the password"
+        //     })
+        // }
         const hash = await argon.hash(request.body.password)
         const data = {
             ...request.body,
             password: hash
+        }
+        if(request.file){
+            data.picture = request.file.filename
         }
         const user = await userModel.insert(data)
         return response.json({
@@ -67,18 +70,23 @@ exports.createUser = async (request, response)=>{
     }
 }
 
-exports.updateUser = async(request, response)=>{
-    const data= await userModel.update(request.params.id, request.body)
-    if(data){
+exports.updateUser = async (request, response)=>{
+    try {
+        const hash = await argon.hash(request.body.password)
+        const data = {
+            ...request.body,
+            password: hash
+        }
+        const user = await userModel.update(request.params.id, data)
         return response.json({
             success: true,
-            massage: "Update user successfully",
-            results: data
+            message: "Update Success!",
+            results: user
         })
+    } catch (error) {
+        return errrorHendle(response,error)
     }
-    errrorHendle(response, data)
 }
- 
 
 exports.getOneUser = async (request,response)=>{
     const data = await userModel.findOne(request.params.id)
