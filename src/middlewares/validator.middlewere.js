@@ -11,7 +11,7 @@ const limitsRules = query("limit").isString().withMessage("Use Number")
 const rules = {
     authLogin: [emailRules, body("password").isLength({min:8}).withMessage("Password invalid")],
     ceateUser: [nameRules, emailRules, passwodRules],
-    allUsers: [searchRules, pageRules, limitsRules]
+    allUsers: [searchRules, pageRules, limitsRules],
 }
 
 const validator = (request, response, next)=>{
