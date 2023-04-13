@@ -77,6 +77,9 @@ exports.updateUser = async (request, response)=>{
             ...request.body,
             password: hash
         }
+        if(request.file){
+            data.picture = request.file.filename
+        }
         const user = await userModel.update(request.params.id, data)
         return response.json({
             success: true,
