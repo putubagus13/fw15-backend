@@ -1,6 +1,6 @@
 const db = require("../helpers/db.helper")
 
-const tabel = "cities"
+const tabel = "partners"
 
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1

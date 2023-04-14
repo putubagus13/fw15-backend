@@ -1,6 +1,6 @@
 const db = require("../helpers/db.helper")
 
-const tabel = "cities"
+const tabel = "reservationSections"
 
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
@@ -19,10 +19,10 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${tabel}" ("picture", "name")
+    INSERT INTO "${tabel}" ("name","price")
     VALUES ($1, $2) RETURNING *
     `
-    const values = [data.picture, data.name]
+    const values = [data.name, data.price]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -31,12 +31,12 @@ exports.update = async function(id, data){
     const query = `
     UPDATE "${tabel}" 
     SET 
-    "picture"= COALESCE(NULLIF($2,''), "picture"),
-    "name"= COALESCE(NULLIF($3,''), "name")
+    "name"= COALESCE(NULLIF($2,''), "name"),
+    "price"= COALESCE(NULLIF($3,''), "price")
      WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.picture, data.name]
+    const values = [id, data.name, data.price]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -44,7 +44,7 @@ exports.update = async function(id, data){
 exports.destroy = async function(id){
     const query = `
     DELETE FROM "${tabel}" WHERE "id"=$1 RETURNING *
-`
+    `
     const values = [id]
     const {rows} = await db.query(query, values)
     return rows[0]

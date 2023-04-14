@@ -1,6 +1,6 @@
 const db = require("../helpers/db.helper")
 
-const tabel = "cities"
+const tabel = "paymentMethod"
 
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
@@ -19,10 +19,10 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${tabel}" ("picture", "name")
-    VALUES ($1, $2) RETURNING *
+    INSERT INTO "${tabel}" ("name")
+    VALUES ($1) RETURNING *
     `
-    const values = [data.picture, data.name]
+    const values = [data.name]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -31,12 +31,10 @@ exports.update = async function(id, data){
     const query = `
     UPDATE "${tabel}" 
     SET 
-    "picture"= COALESCE(NULLIF($2,''), "picture"),
-    "name"= COALESCE(NULLIF($3,''), "name")
-     WHERE "id"=$1
+    "name"= $2 WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.picture, data.name]
+    const values = [id, data.name]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
