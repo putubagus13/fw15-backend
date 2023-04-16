@@ -1,6 +1,6 @@
 const db = require("../helpers/db.helper")
 
-const tabel = "reservations"
+const tabel = "wishList"
 
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
@@ -11,17 +11,17 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
     const query= `
     SELECT * FROM "${tabel}" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
 
-    const values = [limit, offset, `%${search}%`]
+    const values = [limit, offset]
     const {rows} = await db.query(query,values)
     return rows
 }
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${tabel}" ("eventId", "userId", "status", "paymentMethodId")
-    VALUES ($1, $2, $3, $4) RETURNING *
+    INSERT INTO "${tabel}" ("eventId", "userId")
+    VALUES ($1, $2) RETURNING *
     `
-    const values = [data.eventId, data.userId, data.status, data.paymentMethodId]
+    const values = [data.eventId, data.userId]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -31,13 +31,11 @@ exports.update = async function(id, data){
     UPDATE "${tabel}" 
     SET 
     "eventId"= COALESCE(NULLIF($2::INTEGER, NULL), "eventId"),
-    "userId"= COALESCE(NULLIF($3::INTEGER, NULL), "userId"),
-    "status"= COALESCE(NULLIF($4::INTEGER, NULL), "status"),
-    "paymentMethodId"= COALESCE(NULLIF($5::INTEGER, NULL), "paymentMethodId")
+    "userId"= COALESCE(NULLIF($3::INTEGER, NULL), "userId")
      WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.eventId, data.userId, data.status, data.paymentMethodId]
+    const values = [id, data.eventId, data.userId]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 

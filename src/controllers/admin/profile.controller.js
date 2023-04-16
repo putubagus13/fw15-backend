@@ -71,13 +71,17 @@ exports.updateProfile = async (request, response)=>{
 }
 
 exports.deleteProfile = async (request,response)=>{
-    const data = await profileModel.destroy(request.params.id)
-    if(data){
-        return response.json({
-            success: true,
-            massage: "Delete profile successfully",
-            results: data
-        })
+    try {
+        const data = await profileModel.destroy(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Delete profile successfully",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHendle(response, error)
     }
-    errorHendle(response, data)
+   
 }

@@ -73,13 +73,17 @@ exports.updatePartner = async (request, response)=>{
 }
 
 exports.deletePartner = async (request,response)=>{
-    const data = await partnerModel.destroy(request.params.id)
-    if(data){
-        return response.json({
-            success: true,
-            massage: "Delete Partner successfully",
-            results: data
-        })
+    try {
+        const data = await partnerModel.destroy(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Delete Partner successfully",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response,error)
     }
-    errorHandler(response, data)
+    
 }

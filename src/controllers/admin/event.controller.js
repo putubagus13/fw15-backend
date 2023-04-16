@@ -73,13 +73,17 @@ exports.updateEvent = async (request, response)=>{
 }
 
 exports.deleteEvent = async (request,response)=>{
-    const data = await eventModel.destroy(request.params.id)
-    if(data){
-        return response.json({
-            success: true,
-            massage: "Delete event successfully",
-            results: data
-        })
+    try {
+        const data = await eventModel.destroy(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Delete event successfully",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
     }
-    errorHandler(response, data)
+    
 }

@@ -19,10 +19,10 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${tabel}" ("picture", "title", "date", "cityId")
-    VALUES ($1, $2, $3, $4) RETURNING *
+    INSERT INTO "${tabel}" ("picture", "title", "date", "cityId", "desciption")
+    VALUES ($1, $2, $3, $4, $5) RETURNING *
     `
-    const values = [data.picture, data.title, data.date, data.cityId]
+    const values = [data.picture, data.title, data.date, data.cityId, data.desciption]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -34,11 +34,12 @@ exports.update = async function(id, data){
     "picture"= COALESCE(NULLIF($2,''), "picture"),
     "title"= COALESCE(NULLIF($3,''), "title"),
     "date"= COALESCE(NULLIF($4,''), "date"),
-    "cityId"= COALESCE(NULLIF($5,''), "cityId")
+    "cityId"= COALESCE(NULLIF($5,''), "cityId"),
+    "desciption"= COALESCE(NULLIF($6,''), "desciption")
      WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.picture, data.title, data.date, data.cityId]
+    const values = [id, data.picture, data.title, data.date, data.cityId, data.desciption]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 

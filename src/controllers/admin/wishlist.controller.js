@@ -1,10 +1,10 @@
-const categoriesModel = require("../../models/categories.model")
+const wishListModel = require("../../models/wishlist.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 
-exports.getAllCategories = async (request,response)=>{
+exports.getAllWishList = async (request,response)=>{
     try {
-        const data = await categoriesModel.findAll(
+        const data = await wishListModel.findAll(
             request.query.page, 
             request.query.limit, 
             request.query.search, 
@@ -13,7 +13,7 @@ exports.getAllCategories = async (request,response)=>{
 
         return response.json({
             success: true,
-            massage: "List of all category",
+            massage: "List of all wishlist section",
             results: data
         })
     } catch (error) {
@@ -21,7 +21,7 @@ exports.getAllCategories = async (request,response)=>{
     }
 }
 
-exports.createCategories = async (request, response)=>{
+exports.createWishList = async (request, response)=>{
     try{
         const data = {
             ...request.body
@@ -33,21 +33,21 @@ exports.createCategories = async (request, response)=>{
         if(request.file){
             data.picture = request.file.filename
         }
-        const categories = await categoriesModel.insert(data)
-        if(!categories){
+        const wishList = await wishListModel.insert(data)
+        if(!wishList){
             return Error("update_failed")
         }
         return response.json({
             success: true,
-            masssage: `create ${request.body.name} category successfuly`,
-            result: categories
+            masssage: "create wishList successfuly",
+            result: wishList
         })
     }catch(error){
         return errorHandler(response, error)
     }
 }
 
-exports.updateCategories = async (request, response)=>{
+exports.updateWishList = async (request, response)=>{
     try {
         const data = {
             ...request.body
@@ -55,30 +55,30 @@ exports.updateCategories = async (request, response)=>{
         if(request.body.password){
             data.password = await argon.hash(request.body.password)
         }
-        // if(request.file){
-        //     data.picture = request.file.filename
-        // }
-        const categories = await categoriesModel.update(request.params.id, data)
-        if(!categories){
+        if(request.file){
+            data.picture = request.file.filename
+        }
+        const wishList = await wishListModel.update(request.params.id, data)
+        if(!wishList){
             return Error("update_failed")
         }
         return response.json({
             success: true,
-            message: "Update category Success!",
-            results: categories
+            message: "Update wishList Success!",
+            results: wishList
         })
     } catch (error) {
         return errorHandler(response,error)
     }
 }
 
-exports.deleteCategories = async (request,response)=>{
+exports.deleteWishList = async (request,response)=>{
     try {
-        const data = await categoriesModel.destroy(request.params.id)
+        const data = await wishListModel.destroy(request.params.id)
         if(data){
             return response.json({
                 success: true,
-                massage: "Delete category successfully",
+                massage: "Delete wishlist successfully",
                 results: data
             })
         }

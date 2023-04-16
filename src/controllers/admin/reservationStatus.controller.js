@@ -73,13 +73,17 @@ exports.updateStatus = async (request, response)=>{
 }
 
 exports.deleteStatus = async (request,response)=>{
-    const data = await reservationStatusModel.destroy(request.params.id)
-    if(data){
-        return response.json({
-            success: true,
-            massage: "Delete reservation status successfully",
-            results: data
-        })
+    try {
+        const data = await reservationStatusModel.destroy(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Delete reservation status successfully",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
     }
-    errorHandler(response, data)
+    
 }

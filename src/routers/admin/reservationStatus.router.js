@@ -1,10 +1,11 @@
 const reservationStatusRouter = require("express").Router()
 
 const reservationStatusController = require("../../controllers/admin/reservationStatus.controller")
+const validation = require("../../middlewares/validator.middlewere")
 
-reservationStatusRouter.get("/", reservationStatusController.getAllStatus)
-reservationStatusRouter.post("/", reservationStatusController.createStatus)
-reservationStatusRouter.patch("/:id", reservationStatusController.updateStatus)
-reservationStatusRouter.delete("/:id", reservationStatusController.deleteStatus)
+reservationStatusRouter.get("/", validation("getAllReservationStatus"), reservationStatusController.getAllStatus)
+reservationStatusRouter.post("/", validation("createReservationStatus"), reservationStatusController.createStatus)
+reservationStatusRouter.patch("/:id", validation("updateReservationStatus"), reservationStatusController.updateStatus)
+reservationStatusRouter.delete("/:id", validation("deleteReservationStatus"), reservationStatusController.deleteStatus)
 
 module.exports = reservationStatusRouter

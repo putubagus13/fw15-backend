@@ -73,13 +73,17 @@ exports.updateResSection = async (request, response)=>{
 }
 
 exports.deleteResSection = async (request,response)=>{
-    const data = await reservatonSectionModel.destroy(request.params.id)
-    if(data){
-        return response.json({
-            success: true,
-            massage: "Delete reservation section successfully",
-            results: data
-        })
+    try {
+        const data = await reservatonSectionModel.destroy(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Delete reservation section successfully",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
     }
-    errorHandler(response, data)
+    
 }

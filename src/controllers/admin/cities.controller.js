@@ -73,13 +73,17 @@ exports.updateCities = async (request, response)=>{
 }
 
 exports.deleteCities = async (request,response)=>{
-    const data = await citiesModel.destroy(request.params.id)
-    if(data){
-        return response.json({
-            success: true,
-            massage: "Delete city successfully",
-            results: data
-        })
+    try {
+        const data = await citiesModel.destroy(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Delete city successfully",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
     }
-    errorHandler(response, data)
+    
 }

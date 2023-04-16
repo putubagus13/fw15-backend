@@ -11,5 +11,7 @@ admin.use("/reservationSections", require("./admin/reservationSections.router"))
 admin.use("/reservationStatus", require("./admin/reservationStatus.router"))
 admin.use("/paymentMethod", require("./admin/paymentMethod.router"))
 admin.use("/reservations", require("./admin/reservations.router"))
+admin.use("/reservationTickets", require("./admin/reservationTickets.router"))
+admin.use("/wishlists", require("./admin/wishlist.router"))
 
 module.exports = admin

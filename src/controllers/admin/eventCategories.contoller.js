@@ -73,13 +73,17 @@ exports.updateEventCategory = async (request, response)=>{
 }
 
 exports.deleteEventCategory = async (request,response)=>{
-    const data = await eventCategoryModel.destroy(request.params.id)
-    if(data){
-        return response.json({
-            success: true,
-            massage: "Delete event category successfully",
-            results: data
-        })
+    try {
+        const data = await eventCategoryModel.destroy(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Delete event category successfully",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
     }
-    errorHandler(response, data)
+   
 }

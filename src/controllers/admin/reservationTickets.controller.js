@@ -1,10 +1,10 @@
-const categoriesModel = require("../../models/categories.model")
+const reservationTicketModel = require("../../models/reservationTickets.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 
-exports.getAllCategories = async (request,response)=>{
+exports.getAllTicket = async (request,response)=>{
     try {
-        const data = await categoriesModel.findAll(
+        const data = await reservationTicketModel.findAll(
             request.query.page, 
             request.query.limit, 
             request.query.search, 
@@ -13,7 +13,7 @@ exports.getAllCategories = async (request,response)=>{
 
         return response.json({
             success: true,
-            massage: "List of all category",
+            massage: "List of all reservation ticket section",
             results: data
         })
     } catch (error) {
@@ -21,7 +21,7 @@ exports.getAllCategories = async (request,response)=>{
     }
 }
 
-exports.createCategories = async (request, response)=>{
+exports.createTicket = async (request, response)=>{
     try{
         const data = {
             ...request.body
@@ -33,21 +33,21 @@ exports.createCategories = async (request, response)=>{
         if(request.file){
             data.picture = request.file.filename
         }
-        const categories = await categoriesModel.insert(data)
-        if(!categories){
+        const ticket = await reservationTicketModel.insert(data)
+        if(!ticket){
             return Error("update_failed")
         }
         return response.json({
             success: true,
-            masssage: `create ${request.body.name} category successfuly`,
-            result: categories
+            masssage: "create reservation ticket successfuly",
+            result: ticket
         })
     }catch(error){
         return errorHandler(response, error)
     }
 }
 
-exports.updateCategories = async (request, response)=>{
+exports.updateTicket = async (request, response)=>{
     try {
         const data = {
             ...request.body
@@ -55,30 +55,30 @@ exports.updateCategories = async (request, response)=>{
         if(request.body.password){
             data.password = await argon.hash(request.body.password)
         }
-        // if(request.file){
-        //     data.picture = request.file.filename
-        // }
-        const categories = await categoriesModel.update(request.params.id, data)
-        if(!categories){
+        if(request.file){
+            data.picture = request.file.filename
+        }
+        const ticket = await reservationTicketModel.update(request.params.id, data)
+        if(!ticket){
             return Error("update_failed")
         }
         return response.json({
             success: true,
-            message: "Update category Success!",
-            results: categories
+            message: "Update reservation ticket Success!",
+            results: ticket
         })
     } catch (error) {
         return errorHandler(response,error)
     }
 }
 
-exports.deleteCategories = async (request,response)=>{
+exports.deleteTicket = async (request,response)=>{
     try {
-        const data = await categoriesModel.destroy(request.params.id)
+        const data = await reservationTicketModel.destroy(request.params.id)
         if(data){
             return response.json({
                 success: true,
-                massage: "Delete category successfully",
+                massage: "Delete reservation ticket successfully",
                 results: data
             })
         }

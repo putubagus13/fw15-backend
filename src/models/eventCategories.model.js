@@ -5,14 +5,13 @@ const tabel = "eventCategories"
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
-    search = search || ""
     sort = sort || "id"
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
     const query= `
-    SELECT * FROM "${tabel}" WHERE "eventId" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
+    SELECT * FROM "${tabel}" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
 
-    const values = [limit, offset, `%${search}%`]
+    const values = [limit, offset]
     const {rows} = await db.query(query,values)
     return rows
 }
@@ -31,8 +30,8 @@ exports.update = async function(id, data){
     const query = `
     UPDATE "${tabel}" 
     SET 
-    "eventId"= COALESCE(NULLIF($2::INTEGER, NULL), "eventId"),
-    "categoryId"= COALESCE(NULLIF($3::INTEGER, NULL), "categoryId")
+    "eventId"= COALESCE(NULLIF($2, '')::INTEGER, "eventId"),
+    "categoryId"= COALESCE(NULLIF($3, '')::INTEGER, "categoryId")
     WHERE "id"=$1
     RETURNING *
     `
