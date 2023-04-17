@@ -47,3 +47,12 @@ exports.destroy = async function(id){
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
+
+exports.findOne = async function(id){
+    const query =`
+    SELECT * FROM "${tabel}" WHERE id=$1`
+
+    const values = [id]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}

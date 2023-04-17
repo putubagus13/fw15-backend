@@ -87,3 +87,19 @@ exports.deleteCities = async (request,response)=>{
     }
     
 }
+
+exports.getOneUser = async (request,response)=>{
+    try {
+        const data = await citiesModel.findOne(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Detail of city",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+    
+}

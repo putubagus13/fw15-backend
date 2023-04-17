@@ -1,6 +1,6 @@
 const db = require("../helpers/db.helper")
 
-const tabel = "reservationStatus"
+const table = "reservationStatus"
 
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
@@ -10,7 +10,7 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
     const query= `
-    SELECT * FROM "${tabel}" WHERE "name" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
+    SELECT * FROM "${table}" WHERE "name" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
 
     const values = [limit, offset, `%${search}%`]
     const {rows} = await db.query(query,values)
@@ -19,7 +19,7 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${tabel}" ("name")
+    INSERT INTO "${table}" ("name")
     VALUES ($1) RETURNING *
     `
     const values = [data.name]
@@ -29,7 +29,7 @@ exports.insert = async function(data){
 
 exports.update = async function(id, data){
     const query = `
-    UPDATE "${tabel}" 
+    UPDATE "${table}" 
     SET 
     "name"= $2 WHERE "id"=$1
     RETURNING *
@@ -41,9 +41,19 @@ exports.update = async function(id, data){
 
 exports.destroy = async function(id){
     const query = `
-    DELETE FROM "${tabel}" WHERE "id"=$1 RETURNING *
+    DELETE FROM "${table}" WHERE "id"=$1 RETURNING *
 `
     const values = [id]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
+
+exports.findOne = async function(id){
+    const query =`
+  SELECT * FROM "${table}" WHERE id=$1`
+
+    const values = [id]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}
+

@@ -87,3 +87,19 @@ exports.deleteEvent = async (request,response)=>{
     }
     
 }
+
+exports.getOneUser = async (request,response)=>{
+    try {
+        const data = await eventModel.findOne(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Detail event",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+    
+}

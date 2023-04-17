@@ -87,3 +87,19 @@ exports.deleteEventCategory = async (request,response)=>{
     }
    
 }
+
+exports.getOneUser = async (request,response)=>{
+    try {
+        const data = await eventCategoryModel.findOne(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Detail users",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+    
+}

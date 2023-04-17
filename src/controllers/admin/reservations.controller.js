@@ -87,3 +87,19 @@ exports.deleteReservation = async (request,response)=>{
     }
     
 }
+
+exports.getOneUser = async (request,response)=>{
+    try {
+        const data = await reservationModel.findOne(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Detail of category",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+  
+}

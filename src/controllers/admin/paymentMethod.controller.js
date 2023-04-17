@@ -87,3 +87,19 @@ exports.deletePayment = async (request,response)=>{
     }
     
 }
+
+exports.getOneUser = async (request,response)=>{
+    try {
+        const data = await paymentMethodModel.findOne(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Detail payment method",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+  
+}

@@ -87,3 +87,19 @@ exports.deleteTicket = async (request,response)=>{
     }
     
 }
+
+exports.getOneUser = async (request,response)=>{
+    try {
+        const data = await reservationTicketModel.findOne(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Detail reservation ticket",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+  
+}

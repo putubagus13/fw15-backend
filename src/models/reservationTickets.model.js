@@ -1,6 +1,6 @@
 const db = require("../helpers/db.helper")
 
-const tabel = "reservationTickets"
+const table = "reservationTickets"
 
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
@@ -9,7 +9,7 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
     const query= `
-    SELECT * FROM "${tabel}" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
+    SELECT * FROM "${table}" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
 
     const values = [limit, offset]
     const {rows} = await db.query(query,values)
@@ -18,7 +18,7 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${tabel}" ("resevationId", "sectionId", "quantity")
+    INSERT INTO "${table}" ("resevationId", "sectionId", "quantity")
     VALUES ($1, $2, $3) RETURNING *
     `
     const values = [data.resevationId, data.sectionId, data.quantity]
@@ -28,7 +28,7 @@ exports.insert = async function(data){
 
 exports.update = async function(id, data){
     const query = `
-    UPDATE "${tabel}" 
+    UPDATE "${table}" 
     SET 
     "resevationId"= COALESCE(NULLIF($2::INTEGER, NULL), "resevationId"),
     "sectionId"= COALESCE(NULLIF($3::INTEGER, NULL), "sectionId"),
@@ -43,9 +43,18 @@ exports.update = async function(id, data){
 
 exports.destroy = async function(id){
     const query = `
-    DELETE FROM "${tabel}" WHERE "id"=$1 RETURNING *
+    DELETE FROM "${table}" WHERE "id"=$1 RETURNING *
 `
     const values = [id]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
+
+exports.findOne = async function(id){
+    const query =`
+    SELECT * FROM "${table}" WHERE id=$1`
+
+    const values = [id]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}

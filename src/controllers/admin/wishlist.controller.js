@@ -87,3 +87,19 @@ exports.deleteWishList = async (request,response)=>{
     }
     
 }
+
+exports.getOneUser = async (request,response)=>{
+    try {
+        const data = await wishListModel.findOne(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Detail of wish list",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+  
+}

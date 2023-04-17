@@ -87,3 +87,20 @@ exports.deleteCategories = async (request,response)=>{
     }
     
 }
+
+exports.getOneUser = async (request,response)=>{
+    try {
+        const data = await categoriesModel.findOne(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Detail of category",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+    
+}
+
