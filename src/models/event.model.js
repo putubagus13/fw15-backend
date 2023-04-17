@@ -33,8 +33,8 @@ exports.update = async function(id, data){
     SET 
     "picture"= COALESCE(NULLIF($2,''), "picture"),
     "title"= COALESCE(NULLIF($3,''), "title"),
-    "date"= COALESCE(NULLIF($4,''), "date"),
-    "cityId"= COALESCE(NULLIF($5,''), "cityId"),
+    "date"= COALESCE(NULLIF($4::DATE, NULL), "date"),
+    "cityId"= COALESCE(NULLIF($5::INTEGER, NULL), "cityId"),
     "desciption"= COALESCE(NULLIF($6,''), "desciption")
      WHERE "id"=$1
     RETURNING *

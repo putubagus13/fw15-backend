@@ -88,7 +88,7 @@ exports.deletePayment = async (request,response)=>{
     
 }
 
-exports.getOneUser = async (request,response)=>{
+exports.getOne = async (request,response)=>{
     try {
         const data = await paymentMethodModel.findOne(request.params.id)
         if(data){

@@ -88,7 +88,7 @@ exports.deleteCategories = async (request,response)=>{
     
 }
 
-exports.getOneUser = async (request,response)=>{
+exports.getOne = async (request,response)=>{
     try {
         const data = await categoriesModel.findOne(request.params.id)
         if(data){

@@ -88,7 +88,7 @@ exports.deleteReservation = async (request,response)=>{
     
 }
 
-exports.getOneUser = async (request,response)=>{
+exports.getOne = async (request,response)=>{
     try {
         const data = await reservationModel.findOne(request.params.id)
         if(data){

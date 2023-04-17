@@ -5,6 +5,7 @@ const reservationController = require("../../controllers/admin/reservations.cont
 const validation = require("../../middlewares/validator.middlewere")
 
 reservationRouter.get("/", validation("getAllReservation"), reservationController.getAllReservation)
+reservationRouter.get("/:id", validation("getDetail"), reservationController.getOne)
 reservationRouter.post("/", validation("createReservation"), reservationController.createResReservation)
 reservationRouter.patch("/:id", validation("updateReservation"), reservationController.updateReservation)
 reservationRouter.delete("/:id", validation("deleteReservation"), reservationController.deleteReservation)

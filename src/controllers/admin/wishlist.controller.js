@@ -88,7 +88,7 @@ exports.deleteWishList = async (request,response)=>{
     
 }
 
-exports.getOneUser = async (request,response)=>{
+exports.getOne = async (request,response)=>{
     try {
         const data = await wishListModel.findOne(request.params.id)
         if(data){

@@ -30,8 +30,8 @@ exports.update = async function(id, data){
     const query = `
     UPDATE "${tabel}" 
     SET 
-    "eventId"= COALESCE(NULLIF($2, '')::INTEGER, "eventId"),
-    "categoryId"= COALESCE(NULLIF($3, '')::INTEGER, "categoryId")
+    "eventId"= COALESCE(NULLIF($2::INTEGE, NULL), "eventId"),
+    "categoryId"= COALESCE(NULLIF($3::INTEGER, NULL), "categoryId")
     WHERE "id"=$1
     RETURNING *
     `

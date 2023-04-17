@@ -4,6 +4,7 @@ const paymentMethodController = require("../../controllers/admin/paymentMethod.c
 const validation = require("../../middlewares/validator.middlewere")
 
 paymentMethodRouter.get("/", validation("getAllPayment"), paymentMethodController.getAllPayment)
+paymentMethodRouter.get("/:id", validation("getDetail"), paymentMethodController.getOne)
 paymentMethodRouter.post("/", validation("getAllPayment"), paymentMethodController.createPayment)
 paymentMethodRouter.patch("/:id", validation("updatePayment"), paymentMethodController.updatePayment)
 paymentMethodRouter.delete("/:id", validation("deletePayment"), paymentMethodController.deletePayment)

@@ -86,7 +86,7 @@ exports.deleteProfile = async (request,response)=>{
    
 }
 
-exports.getOneUser = async (request,response)=>{
+exports.getOne = async (request,response)=>{
     try {
         const data = await profileModel.findOne(request.params.id)
         if(data){

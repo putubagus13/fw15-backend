@@ -88,7 +88,7 @@ exports.deleteEventCategory = async (request,response)=>{
    
 }
 
-exports.getOneUser = async (request,response)=>{
+exports.getOne = async (request,response)=>{
     try {
         const data = await eventCategoryModel.findOne(request.params.id)
         if(data){

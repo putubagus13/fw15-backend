@@ -5,6 +5,7 @@ const reservationSectionsController = require("../../controllers/admin/reservati
 const validation = require("../../middlewares/validator.middlewere")
 
 reservationSectionsRouter.get("/", validation("getAllReservationSection"), reservationSectionsController.getAllResSection)
+reservationSectionsRouter.get("/:id", validation("getDetail"), reservationSectionsController.getOne)
 reservationSectionsRouter.post("/", validation("createReservationSection"), reservationSectionsController.createResSection)
 reservationSectionsRouter.patch("/:id", validation("updateReservationSection"), reservationSectionsController.updateResSection)
 reservationSectionsRouter.delete("/:id", validation("deleteReservationSection"), reservationSectionsController.deleteResSection)

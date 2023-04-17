@@ -5,7 +5,7 @@ const usersController = require("../../controllers/users.controller")
 const validation = require("../../middlewares/validator.middlewere")
 
 userRouter.get("/",validation("getUser"), usersController.getAllUsers)
-userRouter.get("/:id",validation("deleteUser"), usersController.getOneUser)
+userRouter.get("/:id",validation("getDetail"), usersController.getOneUser)
 userRouter.post("/", validation("ceateUser"), usersController.createUser )
 userRouter.patch("/:id", validation("upadateUser"), usersController.updateUser)
 userRouter.delete("/:id", validation("deleteUser"), usersController.deleteUser)

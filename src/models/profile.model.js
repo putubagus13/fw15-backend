@@ -36,8 +36,8 @@ exports.update = async function(id, data){
     "gender"= COALESCE(NULLIF($5,''), "gender"),
     "profession"= COALESCE(NULLIF($6,''), "profession"),
     "nasionality"= COALESCE(NULLIF($7,''), "nasionality"),
-    "birthDate"= COALESCE(NULLIF($8,''), "birthDate"),
-    "userId"= COALESCE(NULLIF($9,''), "userId"),
+    "birthDate"= COALESCE(NULLIF($8::DATE,''), "birthDate"),
+    "userId"= COALESCE(NULLIF($9::INTEGER, NULL), "userId"),
     WHERE "id"=$1
     RETURNING *
     `

@@ -4,6 +4,7 @@ const categoriesController = require("../../controllers/admin/eventCategories.co
 const validation = require("../../middlewares/validator.middlewere")
 
 eventCategoryRouter.get("/",validation("getAllEventCategories"), categoriesController.getAllEventCategory)
+eventCategoryRouter.get("/:id", validation("getDetail"), categoriesController.getOne)
 eventCategoryRouter.post("/", validation("createEventCategories"), categoriesController.createEventCategory)
 eventCategoryRouter.patch("/:id", validation("updateEventCategories"), categoriesController.updateEventCategory)
 eventCategoryRouter.delete("/:id", validation("deleteEventCategories"), categoriesController.deleteEventCategory)
