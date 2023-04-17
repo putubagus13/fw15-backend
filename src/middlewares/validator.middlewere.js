@@ -40,7 +40,9 @@ const paymentMethodId = body("paymentMethodId").toInt().isInt().withMessage("Inp
 const rules = {
     authLogin: [emailRules, body("password").isLength({min:8}).withMessage("Password invalid")],
     ceateUser: [username, emailRules, passwodRules],
-    upadateUser: [username, Idparams],
+    upadateUser: [username, Idparams, passwodRules],
+    getUser: [page, limit, sortBy],
+    deleteUser: [Idparams],
     allUsers: [searchRules, pageRules, limitsRules],
     profileUser: [emailRules, phoneRules],
     

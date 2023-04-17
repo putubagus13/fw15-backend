@@ -4,10 +4,10 @@ const usersController = require("../../controllers/users.controller")
 // const uploadMiddleware = require("../../middlewares/upload.middleware")
 const validation = require("../../middlewares/validator.middlewere")
 
-userRouter.get("/", usersController.getAllUsers)
-userRouter.get("/:id", usersController.getOneUser)
+userRouter.get("/",validation("getUser"), usersController.getAllUsers)
+userRouter.get("/:id",validation("deleteUser"), usersController.getOneUser)
 userRouter.post("/", validation("ceateUser"), usersController.createUser )
 userRouter.patch("/:id", validation("upadateUser"), usersController.updateUser)
-userRouter.delete("/:id", usersController.deleteUser)
+userRouter.delete("/:id", validation("deleteUser"), usersController.deleteUser)
 
 module.exports = userRouter

@@ -56,9 +56,9 @@ exports.updateUser = async (request, response)=>{
         if(request.body.password){
             data.password = await argon.hash(request.body.password)
         }
-        // if(request.file){
-        //     data.picture = request.file.filename
-        // }
+        if(request.file){
+            data.picture = request.file.filename
+        }
         const user = await userModel.update(request.params.id, data)
         if(!user){
             return Error("update_failed")
