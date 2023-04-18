@@ -68,6 +68,13 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if (error.message === "not_user") {
+        return response.status(404).json({
+            success: false,
+            message: "Error: User not found"
+        })
+    }
+
     console.log(error)
     return response.status(500).json({
         success: false,

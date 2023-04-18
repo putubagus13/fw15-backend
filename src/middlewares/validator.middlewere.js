@@ -1,7 +1,6 @@
 const { body, query, param,validationResult } = require("express-validator")
 const fs = require("fs")
 
-
 const emailRules = body("email").optional().isEmail().withMessage("Email is invalid")
 const passwodRules = body("password").optional().isStrongPassword().withMessage("Password not enough strong")
 const username = body("username").optional().isLength({min:3, max:20}).withMessage("Name format invalid")
@@ -12,7 +11,7 @@ const limitsRules = query("limit").optional().isString().withMessage("Use Number
 
 const name = body("name").optional().isLength({min:3, max:20}).withMessage("Name category invalid")
 const eventId = body("eventId").optional().toInt().isInt().withMessage("Must input number Event id")
-const userId = query("userId").optional().toInt().isInt().withMessage("Must input number User Id")
+const userId = query("userId").optional().isInt().withMessage("Must input number User Id")
 const categoryId = body("categoryId").optional().toInt().isInt().withMessage("Must input number Category Id")
 const Idparams = param("id").optional().toInt().toInt().isInt().withMessage("Id invalid")
 const limit = query("limit").optional().toInt().isInt().withMessage("input number limit is invalid ")
@@ -34,17 +33,23 @@ const sectionId = body("sectionId").optional().toInt().isInt().withMessage("Must
 const quantity = body("quantity").optional().toInt().isInt().withMessage("Input quantity is invalid")
 const status = body("status").optional().toInt().isInt().withMessage("Must input number section id")
 const paymentMethodId = body("paymentMethodId").optional().toInt().isInt().withMessage("Input quantity is invalid")
+const code = body("code").optional().isLength({min:3, max:20}).withMessage("Code Invalid")
 
 
 
 const rules = {
     authLogin: [emailRules, body("password").isLength({min:8}).withMessage("Password invalid")],
+    authForgot: [emailRules],
     ceateUser: [username, emailRules, passwodRules],
     upadateUser: [username, Idparams, passwodRules],
     getUser: [page, limit, sortBy],
     deleteUser: [Idparams],
     allUsers: [searchRules, pageRules, limitsRules],
     profileUser: [emailRules, phoneRules],
+    resetPassword:[
+        body("confirmPassword").custom((value, {req}) =>{
+            return value === req.body.password
+        }).withMessage("Confirm password does not match"), emailRules, passwodRules, code],
     
     createCategories: [name],
     getAllcategories: [page, limit, sortBy],
