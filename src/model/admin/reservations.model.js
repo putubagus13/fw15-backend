@@ -1,16 +1,15 @@
-const db = require("../helpers/db.helper")
+const db = require("../../helpers/db.helper")
 
-const tabel = "categories"
+const teble = "reservations"
 
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
-    search = search || ""
     sort = sort || "id"
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
     const query= `
-    SELECT * FROM "${tabel}" WHERE "name" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
+    SELECT * FROM "${teble}" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
 
     const values = [limit, offset, `%${search}%`]
     const {rows} = await db.query(query,values)
@@ -19,29 +18,33 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${tabel}" ("name")
-    VALUES ($1) RETURNING *
+    INSERT INTO "${teble}" ("eventId", "userId", "status", "paymentMethodId")
+    VALUES ($1, $2, $3, $4) RETURNING *
     `
-    const values = [data.name]
+    const values = [data.eventId, data.userId, data.status, data.paymentMethodId]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
 
 exports.update = async function(id, data){
     const query = `
-    UPDATE "${tabel}" 
+    UPDATE "${teble}" 
     SET 
-    "name"= $2 WHERE "id"=$1
+    "eventId"= COALESCE(NULLIF($2::INTEGER, NULL), "eventId"),
+    "userId"= COALESCE(NULLIF($3::INTEGER, NULL), "userId"),
+    "status"= COALESCE(NULLIF($4::INTEGER, NULL), "status"),
+    "paymentMethodId"= COALESCE(NULLIF($5::INTEGER, NULL), "paymentMethodId")
+     WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.name]
+    const values = [id, data.eventId, data.userId, data.status, data.paymentMethodId]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
 
 exports.destroy = async function(id){
     const query = `
-    DELETE FROM "${tabel}" WHERE "id"=$1 RETURNING *
+    DELETE FROM "${teble}" WHERE "id"=$1 RETURNING *
 `
     const values = [id]
     const {rows} = await db.query(query, values)
@@ -50,7 +53,7 @@ exports.destroy = async function(id){
 
 exports.findOne = async function(id){
     const query =`
-    SELECT * FROM "${tabel}" WHERE id=$1`
+    SELECT * FROM "${teble}" WHERE id=$1`
 
     const values = [id]
     const {rows} = await db.query(query, values)

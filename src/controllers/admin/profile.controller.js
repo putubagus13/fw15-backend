@@ -1,4 +1,4 @@
-const profileModel = require("../../models/profile.model")
+const profileModel = require("../../model/admin/profile.model")
 const errorHendle = require("../../helpers/errorHandler")
 const argon = require("argon2")
 

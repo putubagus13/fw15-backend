@@ -1,4 +1,4 @@
-const reservationModel = require("../../models/reservations.model")
+const reservationModel = require("../../model/admin/reservations.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 

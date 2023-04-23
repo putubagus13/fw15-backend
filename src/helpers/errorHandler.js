@@ -75,6 +75,13 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if (error.message === "forgot_failed") {
+        return response.status(404).json({
+            success: false,
+            message: "Request resets password failed"
+        })
+    }
+
     console.log(error)
     return response.status(500).json({
         success: false,

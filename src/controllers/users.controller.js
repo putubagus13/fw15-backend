@@ -1,5 +1,5 @@
 // const { request, response } = require("express")
-const userModel = require("../models/users.model")
+const userModel = require("../model/admin/users.model")
 const errrorHendle = require("../helpers/errorHandler")
 const argon = require("argon2")
 

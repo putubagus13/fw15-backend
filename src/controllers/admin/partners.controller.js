@@ -1,4 +1,4 @@
-const partnerModel = require("../../models/partners.model")
+const partnerModel = require("../../model/admin/partners.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 

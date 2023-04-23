@@ -1,4 +1,4 @@
-const citiesModel = require("../../models/cities.model")
+const citiesModel = require("../../model/admin/cities.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 

@@ -1,6 +1,6 @@
-const db = require("../helpers/db.helper")
+const db = require("../../helpers/db.helper")
 
-const tabel = "events"
+const tabel = "partners"
 
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
@@ -10,7 +10,7 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
     const query= `
-    SELECT * FROM "${tabel}" WHERE "title" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
+    SELECT * FROM "${tabel}" WHERE "name" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
 
     const values = [limit, offset, `%${search}%`]
     const {rows} = await db.query(query,values)
@@ -19,10 +19,10 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${tabel}" ("picture", "title", "date", "cityId", "desciption")
-    VALUES ($1, $2, $3, $4, $5) RETURNING *
+    INSERT INTO "${tabel}" ("picture", "name")
+    VALUES ($1, $2) RETURNING *
     `
-    const values = [data.picture, data.title, data.date, data.cityId, data.desciption]
+    const values = [data.picture, data.name]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -32,14 +32,11 @@ exports.update = async function(id, data){
     UPDATE "${tabel}" 
     SET 
     "picture"= COALESCE(NULLIF($2,''), "picture"),
-    "title"= COALESCE(NULLIF($3,''), "title"),
-    "date"= COALESCE(NULLIF($4::DATE, NULL), "date"),
-    "cityId"= COALESCE(NULLIF($5::INTEGER, NULL), "cityId"),
-    "desciption"= COALESCE(NULLIF($6,''), "desciption")
+    "name"= COALESCE(NULLIF($3,''), "name")
      WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.picture, data.title, data.date, data.cityId, data.desciption]
+    const values = [id, data.picture, data.name]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 

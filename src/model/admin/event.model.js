@@ -1,27 +1,28 @@
-const db = require("../helpers/db.helper")
+const db = require("../../helpers/db.helper")
 
-const tabel = "eventCategories"
+const tabel = "events"
 
 exports.findAll = async function(page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
+    search = search || ""
     sort = sort || "id"
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
     const query= `
-    SELECT * FROM "${tabel}" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
+    SELECT * FROM "${tabel}" WHERE "title" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
 
-    const values = [limit, offset]
+    const values = [limit, offset, `%${search}%`]
     const {rows} = await db.query(query,values)
     return rows
 }
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${tabel}" ("eventId", "categoryId")
-    VALUES ($1, $2) RETURNING *
+    INSERT INTO "${tabel}" ("picture", "title", "date", "cityId", "desciption")
+    VALUES ($1, $2, $3, $4, $5) RETURNING *
     `
-    const values = [data.eventId, data.categoryId]
+    const values = [data.picture, data.title, data.date, data.cityId, data.desciption]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -30,12 +31,15 @@ exports.update = async function(id, data){
     const query = `
     UPDATE "${tabel}" 
     SET 
-    "eventId"= COALESCE(NULLIF($2::INTEGE, NULL), "eventId"),
-    "categoryId"= COALESCE(NULLIF($3::INTEGER, NULL), "categoryId")
-    WHERE "id"=$1
+    "picture"= COALESCE(NULLIF($2,''), "picture"),
+    "title"= COALESCE(NULLIF($3,''), "title"),
+    "date"= COALESCE(NULLIF($4::DATE, NULL), "date"),
+    "cityId"= COALESCE(NULLIF($5::INTEGER, NULL), "cityId"),
+    "desciption"= COALESCE(NULLIF($6,''), "desciption")
+     WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.eventId, data.categoryId]
+    const values = [id, data.picture, data.title, data.date, data.cityId, data.desciption]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 

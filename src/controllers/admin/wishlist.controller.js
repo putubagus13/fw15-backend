@@ -1,4 +1,4 @@
-const wishListModel = require("../../models/wishlist.model")
+const wishListModel = require("../../model/admin/wishlist.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 

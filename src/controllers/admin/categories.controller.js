@@ -1,4 +1,4 @@
-const categoriesModel = require("../../models/categories.model")
+const categoriesModel = require("../../model/admin/categories.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 

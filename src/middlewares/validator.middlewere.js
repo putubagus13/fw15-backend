@@ -1,4 +1,4 @@
-const { body, query, param,validationResult } = require("express-validator")
+const { body, query, param, validationResult } = require("express-validator")
 const fs = require("fs")
 
 const emailRules = body("email").optional().isEmail().withMessage("Email is invalid")

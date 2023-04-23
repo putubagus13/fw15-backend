@@ -1,7 +1,7 @@
 const errorHendle = require("../helpers/errorHandler")
-const userModel = require("../models/users.model")
-const profileModel = require("../models/profile.model")
-const forgotRequestModel = require("../models/forgotRequest.model")
+const userModel = require("../model/admin/users.model")
+const profileModel = require("../model/admin/profile.model")
+const forgotRequestModel = require("../model/admin/forgotRequest.model")
 const jwt = require("jsonwebtoken")
 const {APP_SECRET}= process.env
 const argon = require("argon2")
@@ -66,7 +66,7 @@ exports.forgotRequest = async(request, response)=>{
         }
         const randomNumber = Math.random()
         const rounded = Math.round(randomNumber * 1000)
-        const padded = String(rounded).padStart(6, "0")
+        const padded = String(rounded).padEnd(6, "0")
 
         const forgot = await forgotRequestModel.insert({
             email: user.email,

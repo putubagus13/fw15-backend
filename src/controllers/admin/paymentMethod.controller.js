@@ -1,4 +1,4 @@
-const paymentMethodModel = require("../../models/paymentMethod.model")
+const paymentMethodModel = require("../../model/admin/paymentMethod.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 

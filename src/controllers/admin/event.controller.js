@@ -1,4 +1,4 @@
-const eventModel = require("../../models/event.model")
+const eventModel = require("../../model/admin/event.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 

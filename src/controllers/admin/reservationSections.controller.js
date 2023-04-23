@@ -1,4 +1,4 @@
-const reservatonSectionModel = require("../../models/reservationSections.model")
+const reservatonSectionModel = require("../../model/admin/reservationSections.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 
