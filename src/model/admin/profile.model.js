@@ -33,15 +33,34 @@ exports.update = async function(id, data){
     "picture"= COALESCE(NULLIF($2,''), "picture"),
     "fullName"= COALESCE(NULLIF($3,''), "fullName"),
     "phoneNumbe"= COALESCE(NULLIF($4,''), "phoneNumbe"),
-    "gender"= COALESCE(NULLIF($5,''), "gender"),
+    "gender"= COALESCE(NULLIF($5::BOOLEAN, NULL), "gender"),
     "profession"= COALESCE(NULLIF($6,''), "profession"),
     "nasionality"= COALESCE(NULLIF($7,''), "nasionality"),
-    "birthDate"= COALESCE(NULLIF($8::DATE,''), "birthDate"),
-    "userId"= COALESCE(NULLIF($9::INTEGER, NULL), "userId"),
+    "birthDate"= COALESCE(NULLIF($8::DATE,NULL), "birthDate"),
+    "userId"= COALESCE(NULLIF($9::INTEGER, NULL), "userId")
     WHERE "id"=$1
     RETURNING *
     `
     const values = [id, data.picture, data.fullName, data.phoneNumbe, data.gender, data.profession, data.nasionality, data.birthDate, data.userId]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+} 
+
+exports.updateByUserId = async function(userId, data){
+    const query = `
+    UPDATE "${table}" 
+    SET 
+    "picture"= COALESCE(NULLIF($2,''), "picture"),
+    "fullName"= COALESCE(NULLIF($3,''), "fullName"),
+    "phoneNumbe"= COALESCE(NULLIF($4,''), "phoneNumbe"),
+    "gender"= COALESCE(NULLIF($5::BOOLEAN, NULL), "gender"),
+    "profession"= COALESCE(NULLIF($6,''), "profession"),
+    "nasionality"= COALESCE(NULLIF($7,''), "nasionality"),
+    "birthDate"= COALESCE(NULLIF($8::DATE, NULL), "birthDate")
+    WHERE "userId"=$1
+    RETURNING *
+    `
+    const values = [userId, data.picture, data.fullName, data.phoneNumbe, data.gender, data.profession, data.nasionality, data.birthDate]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -63,3 +82,27 @@ exports.findOne = async function(id){
     const {rows} = await db.query(query, values)
     return rows[0]
 }
+
+exports.findOneByUserId = async function(userId){
+    const query =`
+    SELECT  
+    "u"."id",
+    "p"."fullName",
+    "u"."username",
+    "u"."email",
+    "p"."phoneNumbe",
+    "p"."gender",
+    "p"."profession",
+    "p"."nasionality",
+    "p"."birthDate",
+    "p"."createdAt",
+    "p"."updatedAt"
+    FROM "${table}" "p"
+    JOIN "users" "u" ON "u"."id" = "p"."userId"
+    WHERE "p"."userId"=$1`
+
+    const values = [userId]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}
+

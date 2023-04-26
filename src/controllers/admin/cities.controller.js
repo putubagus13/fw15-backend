@@ -1,6 +1,9 @@
 const citiesModel = require("../../model/admin/cities.model")
 const errorHandler = require("../../helpers/errorHandler")
+const eventModel = require("../../model/admin/event.model")
 const argon = require("argon2")
+const jwt = require("jsonwebtoken")
+const {APP_SECRET}= process.env
 
 exports.getAllCities = async (request,response)=>{
     try {
@@ -37,10 +40,17 @@ exports.createCities = async (request, response)=>{
         if(!cities){
             return Error("update_failed")
         }
+        
+        const eventData ={
+            cityId: cities.id
+        }
+        await eventModel.insert(eventData)
+        const token = jwt.sign({id: cities.id}, APP_SECRET)
         return response.json({
             success: true,
             masssage: "create city successfuly",
-            result: cities
+            result: cities,
+            token: (token)
         })
     }catch(error){
         return errorHandler(response, error)

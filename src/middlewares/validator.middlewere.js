@@ -1,5 +1,5 @@
 const { body, query, param, validationResult } = require("express-validator")
-const fs = require("fs")
+const fileRemover = require("../helpers/fileRemover.helpers")
 
 const emailRules = body("email").optional().isEmail().withMessage("Email is invalid")
 const passwodRules = body("password").optional().isStrongPassword().withMessage("Password not enough strong")
@@ -72,7 +72,7 @@ const rules = {
     updateEvent: [Idparams, title, date, cityId, desciption],
     deleteEvent: [Idparams],
 
-    createProfile: [fullName, phoneNumber, gender, profession, nationality, birthDate],
+    createProfile: [fullName, phoneNumber, gender, profession, nationality],
     getAllProfile: [page, limit, sortBy],
     updateProfile: [Idparams, fullName, phoneNumber, gender, profession, nationality, birthDate],
     deleteProfile: [Idparams],
@@ -114,25 +114,22 @@ const rules = {
 
 }
 
-const validator = (request, response, next)=>{
+const validator = (request, response, next) => {
     const errors = validationResult(request)
     try {
-        if(request.file){
-            const filename = `upload/${request.file.filename}`
-            fs.unlink(filename, (err)=>{
-                console.log(err)
+        if (!errors.isEmpty()) {
+            fileRemover(request.file)
+            return response.json({
+                results: errors
             })
         }
-        if (!errors.isEmpty()){
-            throw Error("error_validation")
-        }
         return next()
-
-    } catch (error) {
-        return response.status(400).json({ 
+    } catch(error) {
+        console.log(error)
+        return response.status(400).json({
             success: false,
-            message: "Error Validation",
-            errors: errors.array() 
+            message: "Validation error",
+            results: errors.array()
         })
     }
 }

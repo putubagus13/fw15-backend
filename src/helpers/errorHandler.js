@@ -82,6 +82,27 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if (error.message === "profile_update_failed") {
+        return response.status(404).json({
+            success: false,
+            message: "Update profile failed"
+        })
+    }
+
+    if (error.message === "profile_not_found") {
+        return response.status(404).json({
+            success: false,
+            message: "Profile not found"
+        })
+    }
+
+    if (error.message === "File too large") {
+        return response.status(400).json({
+            success: false,
+            message: "File too large!"
+        })
+    }
+    
     console.log(error)
     return response.status(500).json({
         success: false,

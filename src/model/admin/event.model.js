@@ -44,6 +44,22 @@ exports.update = async function(id, data){
     return rows[0]
 } 
 
+exports.updateByCityId = async function(cityId, data){
+    const query = `
+    UPDATE "${tabel}" 
+    SET 
+    "picture"= COALESCE(NULLIF($2,''), "picture"),
+    "title"= COALESCE(NULLIF($3,''), "title"),
+    "date"= COALESCE(NULLIF($4::DATE, NULL), "date"),
+    "desciption"= COALESCE(NULLIF($5,''), "desciption")
+    WHERE "cityId"=$1
+    RETURNING *
+    `
+    const values = [cityId, data.picture, data.title, data.date, data.desciption]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+} 
+
 exports.destroy = async function(id){
     const query = `
     DELETE FROM "${tabel}" WHERE "id"=$1 RETURNING *
@@ -58,6 +74,24 @@ exports.findOne = async function(id){
     SELECT * FROM "${tabel}" WHERE id=$1`
 
     const values = [id]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}
+
+exports.findOneByCityId = async function(cityId){
+    const query =`
+    SELECT  
+    "e"."id",
+    "e"."picture",
+    "e"."title",
+    "e"."desciption",
+    "e"."createdAt",
+    "e"."updatedAt"
+    FROM "${tabel}" "e"
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    WHERE "e"."cityId"=$1`
+
+    const values = [cityId]
     const {rows} = await db.query(query, values)
     return rows[0]
 }

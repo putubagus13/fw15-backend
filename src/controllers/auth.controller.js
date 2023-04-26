@@ -1,6 +1,7 @@
 const errorHendle = require("../helpers/errorHandler")
 const userModel = require("../model/admin/users.model")
 const profileModel = require("../model/admin/profile.model")
+const reservationModel = require("../model/admin/reservations.model")
 const forgotRequestModel = require("../model/admin/forgotRequest.model")
 const jwt = require("jsonwebtoken")
 const {APP_SECRET}= process.env
@@ -45,7 +46,12 @@ exports.register = async (request, response)=>{
             fullName, 
             userId: user.id
         }
+        
+        const reservationData = {
+            userId: user.id
+        }
         await profileModel.insert(profileData)
+        await reservationModel.insert(reservationData)
         const token = jwt.sign({id: user.id}, APP_SECRET)
         return response.json({
             success: true,
