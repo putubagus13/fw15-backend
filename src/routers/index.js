@@ -16,6 +16,7 @@ router.use("/categories", authMiddleweres, require("../routers/categories.router
 router.use("/cities", authMiddleweres, require("../routers/cities.router"))
 router.use("/payment", authMiddleweres, require("../routers/payment.router"))
 router.use("/partners", authMiddleweres, require("../routers/partners.router"))
+router.use("/reservation", authMiddleweres, require("../routers/reservation.router"))
 
 
 router.use("*", (request,response)=>{
