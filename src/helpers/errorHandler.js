@@ -61,6 +61,20 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if(error?.message?.includes("password_empty")){
+        return response.status(401).json({
+            success: false,
+            message: "Old password cant be empty"
+        })
+    }
+
+    if(error?.message?.includes("Change_failed")){
+        return response.status(401).json({
+            success: false,
+            message: "Change password failed"
+        })
+    }
+
     if(error?.message?.includes("update_failed")){
         return response.status(400).json({
             success: false,
