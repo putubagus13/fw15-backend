@@ -34,6 +34,8 @@ const quantity = body("quantity").optional().toInt().isInt().withMessage("Input 
 const status = body("status").optional().toInt().isInt().withMessage("Must input number section id")
 const paymentMethodId = body("paymentMethodId").optional().toInt().isInt().withMessage("Input quantity is invalid")
 const code = body("code").optional().isLength({min:3, max:20}).withMessage("Code Invalid")
+const oldPassword = body("oldPassword").optional().isStrongPassword().withMessage("Password not enough strong")
+const newPassword = body("newPassword").optional().isStrongPassword().withMessage("Password not enough strong")
 
 
 
@@ -72,7 +74,7 @@ const rules = {
     updateEvent: [Idparams, title, date, cityId, desciption],
     deleteEvent: [Idparams],
 
-    createProfile: [fullName, phoneNumber, gender, profession, nationality],
+    createProfile: [fullName, phoneNumber, gender, profession, nationality, emailRules],
     getAllProfile: [page, limit, sortBy],
     updateProfile: [Idparams, fullName, phoneNumber, gender, profession, nationality, birthDate],
     deleteProfile: [Idparams],
@@ -111,6 +113,10 @@ const rules = {
     getAllReservation: [page, limit, sortBy],
     updateReservation: [Idparams, eventId, userId, status, paymentMethodId],
     deleteReservation: [Idparams],
+
+    changePassword: [oldPassword, newPassword,]
+
+
 
 }
 

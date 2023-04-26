@@ -7,9 +7,10 @@ exports.changePassword = async (request, response) => {
         const {id} = request.user
         const user = await changePasswordModel.findOneUserId(id)
         const {oldPassword, newPassword, confirmPassword} = request.body
-        console.log(oldPassword)
-        if( oldPassword !== user.password){
-            throw Error("password_empty")
+        
+        const verify = argon.verify(user.password, oldPassword)
+        if(!verify){
+            throw Error("wrong_credentials")
         }
         if( newPassword !== confirmPassword){
             throw Error("password_unmatch")
