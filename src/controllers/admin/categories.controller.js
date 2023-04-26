@@ -1,5 +1,6 @@
 const categoriesModel = require("../../model/admin/categories.model")
 const errorHandler = require("../../helpers/errorHandler")
+const eventCategoryModel = require("../../model/admin/eventCategories.model")
 const argon = require("argon2")
 
 exports.getAllCategories = async (request,response)=>{
@@ -37,6 +38,10 @@ exports.createCategories = async (request, response)=>{
         if(!categories){
             return Error("update_failed")
         }
+        const eventCategoryData = {
+            categoryId: categories.id
+        }
+        await eventCategoryModel.insert(eventCategoryData)
         return response.json({
             success: true,
             masssage: `create ${request.body.name} category successfuly`,
@@ -55,9 +60,9 @@ exports.updateCategories = async (request, response)=>{
         if(request.body.password){
             data.password = await argon.hash(request.body.password)
         }
-        // if(request.file){
-        //     data.picture = request.file.filename
-        // }
+        if(request.file){
+            data.picture = request.file.filename
+        }
         const categories = await categoriesModel.update(request.params.id, data)
         if(!categories){
             return Error("update_failed")

@@ -12,6 +12,8 @@ router.use("/auth", require("./auth.router"))
 router.use("/admin",authMiddleweres, require("../routers/admin.router"))
 router.use("/profile", authMiddleweres, require("../routers/profile.router"))
 router.use("/event", authMiddleweres, require("../routers/event.router"))
+router.use("/categories", authMiddleweres, require("../routers/categories.router"))
+router.use("/cities", authMiddleweres, require("../routers/cities.router"))
 
 
 router.use("*", (request,response)=>{
