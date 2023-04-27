@@ -3,6 +3,7 @@ const userModel = require("../model/admin/users.model")
 const profileModel = require("../model/admin/profile.model")
 const reservationModel = require("../model/admin/reservations.model")
 const forgotRequestModel = require("../model/admin/forgotRequest.model")
+const wishListModel = require("../model/admin/wishlist.model")
 const jwt = require("jsonwebtoken")
 const {APP_SECRET}= process.env
 const argon = require("argon2")
@@ -15,7 +16,7 @@ exports.login = async (request, response)=>{
         if(!user){
             throw Error("wrong_credentials")
         }
-        const verify = argon.verify(user.password, password)
+        const verify = await argon.verify(user.password, password)
         if(!verify){
             throw Error("wrong_credentials")
         }
@@ -50,8 +51,13 @@ exports.register = async (request, response)=>{
         const reservationData = {
             userId: user.id
         }
+
+        const wishListData = {
+            userId: user.id
+        }
         await profileModel.insert(profileData)
         await reservationModel.insert(reservationData)
+        await wishListModel.insert(wishListData)
         const token = jwt.sign({id: user.id}, APP_SECRET)
         return response.json({
             success: true,
@@ -93,9 +99,13 @@ exports.forgotRequest = async(request, response)=>{
 exports.resetPassword = async (request, response) =>{
     try {
         const {code, email, password} = request.body
-        const find = await forgotRequestModel.findOneByCodeAndEmail(code, email)
+        const find = await forgotRequestModel.findOneByEmail(email)
+        console.log(find.code)
         if(!find){
             throw Error("Reset_failed")
+        }
+        if(code !== find.code){
+            throw Error("code_wrong")
         }
         const selectedUser = await userModel.findOneByEmail(email)
         const data ={
@@ -111,6 +121,6 @@ exports.resetPassword = async (request, response) =>{
             message: "Reset password success"
         })
     } catch (error) {
-        return errorHendle(request,error)
+        return errorHendle(response,error)
     }
 }

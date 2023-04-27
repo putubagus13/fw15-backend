@@ -30,7 +30,7 @@ exports.update = async function(id, data){
     const query = `
     UPDATE "${tabel}" 
     SET 
-    "eventId"= COALESCE(NULLIF($2::INTEGE, NULL), "eventId"),
+    "eventId"= COALESCE(NULLIF($2::INTEGER, NULL), "eventId"),
     "categoryId"= COALESCE(NULLIF($3::INTEGER, NULL), "categoryId")
     WHERE "id"=$1
     RETURNING *
@@ -52,6 +52,28 @@ exports.destroy = async function(id){
 exports.findOne = async function(id){
     const query =`
     SELECT * FROM "${tabel}" WHERE id=$1`
+
+    const values = [id]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}
+
+exports.findOneByIdParams = async function(id){
+    const query =`
+    SELECT
+    "e"."id",
+    "e"."title",
+    "ci"."name" as "location",
+    STRING_AGG("c"."name", ', ') as "category",
+    "e"."desciption",
+    "e"."date",
+    "e"."createdAt",
+    "e"."updatedAt"
+    FROM "${tabel}" "ec"
+    JOIN "events" "e" ON "e"."id" = "ec"."eventId"
+    JOIN "categories" "c" ON "c"."id" = "ec"."categoryId"
+    JOIN "cities" "ci" ON "ci"."id" = "e"."cityId"
+    GROUP BY "e"."id", "ci"."name"`
 
     const values = [id]
     const {rows} = await db.query(query, values)

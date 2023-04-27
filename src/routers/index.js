@@ -18,6 +18,8 @@ router.use("/payment", authMiddleweres, require("../routers/payment.router"))
 router.use("/partners", authMiddleweres, require("../routers/partners.router"))
 router.use("/reservation", authMiddleweres, require("../routers/reservation.router"))
 router.use("/changePassword", authMiddleweres, require("../routers/changePassword.router"))
+router.use("/eventCategories", authMiddleweres, require("../routers/eventCategories.router"))
+router.use("/wishList", authMiddleweres, require("../routers/wishList.router"))
 
 
 router.use("*", (request,response)=>{

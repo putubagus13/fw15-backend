@@ -75,6 +75,13 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if(error?.message?.includes("Cant_same_password")){
+        return response.status(401).json({
+            success: false,
+            message: "The new password cannot be the same as the old password"
+        })
+    }
+
     if(error?.message?.includes("update_failed")){
         return response.status(400).json({
             success: false,
@@ -82,6 +89,12 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if(error?.message?.includes("wishlist_not_found")){
+        return response.status(400).json({
+            success: false,
+            message: "Error: wishlist not found"
+        })
+    }
     if (error.message === "not_user") {
         return response.status(404).json({
             success: false,
@@ -93,6 +106,20 @@ const errrorHendle = (response, error)=>{
         return response.status(404).json({
             success: false,
             message: "Request resets password failed"
+        })
+    }
+
+    if (error.message === "reset_failed") {
+        return response.status(404).json({
+            success: false,
+            message: "Reset failed! Please check your code confirm and email again"
+        })
+    }
+
+    if (error.message === "code_wrong") {
+        return response.status(404).json({
+            success: false,
+            message: "Confirm code is wrong"
         })
     }
 
@@ -114,6 +141,13 @@ const errrorHendle = (response, error)=>{
         return response.status(400).json({
             success: false,
             message: "File too large!"
+        })
+    }
+
+    if (error.message === "city_not_found") {
+        return response.status(404).json({
+            success: false,
+            message: "city not found"
         })
     }
     

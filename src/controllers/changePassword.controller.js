@@ -7,10 +7,13 @@ exports.changePassword = async (request, response) => {
         const {id} = request.user
         const user = await changePasswordModel.findOneUserId(id)
         const {oldPassword, newPassword, confirmPassword} = request.body
-        
-        const verify = argon.verify(user.password, oldPassword)
+
+        const verify = await argon.verify(user.password, oldPassword)
         if(!verify){
             throw Error("wrong_credentials")
+        }
+        if( newPassword === oldPassword){
+            throw Error("Cant_same_password")
         }
         if( newPassword !== confirmPassword){
             throw Error("password_unmatch")
@@ -18,7 +21,7 @@ exports.changePassword = async (request, response) => {
         const data ={
             password: await argon.hash(newPassword)
         }
-        const userData = await changePasswordModel.update(user.id, data)
+        const userData = await changePasswordModel.update(id, data)
         if(!userData){
             throw Error("Change_failed")
         }

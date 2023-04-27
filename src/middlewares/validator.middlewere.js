@@ -18,7 +18,6 @@ const limit = query("limit").optional().toInt().isInt().withMessage("input numbe
 const page = query("page").optional().toInt().isInt().withMessage("input number page is invalid ")
 const sortBy = query("sortBy").optional().isIn("ASC", "DESC").withMessage("Sort type is invalid! Choose: ASC/DESC")
 const title = body("title").optional().isLength({min:3, max:20}).withMessage("Title invalid")
-const date = body("date").optional().isDate("YYYY-MM-DD").withMessage("Date Invalid")
 const cityId = body("eventId").optional().toInt().isInt().withMessage("Must input number city id")
 const desciption = body("name").optional().isLength({min:3, max:225}).withMessage("Name category invalid")
 const fullName = body("fullName").optional().isLength({min:3, max:20}).withMessage("Full name format invalid")
@@ -33,7 +32,7 @@ const sectionId = body("sectionId").optional().toInt().isInt().withMessage("Must
 const quantity = body("quantity").optional().toInt().isInt().withMessage("Input quantity is invalid")
 const status = body("status").optional().toInt().isInt().withMessage("Must input number section id")
 const paymentMethodId = body("paymentMethodId").optional().toInt().isInt().withMessage("Input quantity is invalid")
-const code = body("code").optional().isLength({min:3, max:20}).withMessage("Code Invalid")
+const code = body("code").optional().isLength({min:6, max:6}).withMessage("Code Invalid")
 const oldPassword = body("oldPassword").optional().isStrongPassword().withMessage("Password not enough strong")
 const newPassword = body("newPassword").optional().isStrongPassword().withMessage("Password not enough strong")
 
@@ -69,9 +68,9 @@ const rules = {
     updateEventCategories: [Idparams, eventId, categoryId],
     deleteEventCategories: [Idparams],
 
-    createEvent: [title, date, cityId, desciption],
+    createEvent: [title, cityId, desciption],
     getAllEvent: [page, limit, sortBy],
-    updateEvent: [Idparams, title, date, cityId, desciption],
+    updateEvent: [Idparams, title, cityId, desciption],
     deleteEvent: [Idparams],
 
     createProfile: [fullName, phoneNumber, gender, profession, nationality, emailRules],

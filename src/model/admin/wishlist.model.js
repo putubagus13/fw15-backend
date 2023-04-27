@@ -58,3 +58,38 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
+exports.updateByUserId = async (userId, data)=>{
+    const query = `
+    UPDATE "${table}" 
+    SET 
+    "eventId"= COALESCE(NULLIF($2::INTEGER, NULL), "eventId")
+     WHERE "userId"=$1
+    RETURNING *
+    `
+    const values = [userId, data.eventId]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}
+
+exports.findOneByUserId = async function(userId){
+    const query =`
+    SELECT  
+    "u"."id",
+    "u"."username",
+    "u"."email",
+    "e"."picture",
+    "e"."title",
+    "e"."date",
+    "e"."cityId",
+    "e"."desciption",
+    "w"."createdAt",
+    "w"."updatedAt"
+    FROM "${table}" "w"
+    JOIN "users" "u" ON "u"."id" = "w"."userId"
+    JOIN "events" "e" ON "e".id = "w"."eventId"
+    WHERE "w"."userId"=$1`
+
+    const values = [userId]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}
