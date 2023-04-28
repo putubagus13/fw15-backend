@@ -168,7 +168,7 @@ const errrorHendle = (response, error)=>{
     console.log(error)
     return response.status(500).json({
         success: false,
-        message: "Error: Intenal server error"
+        message: "Error: Internal server error"
     })
 }
 
