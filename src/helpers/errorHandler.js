@@ -150,6 +150,13 @@ const errrorHendle = (response, error)=>{
             message: "city not found"
         })
     }
+
+    if (error.message === "wishList_not_found") {
+        return response.status(404).json({
+            success: false,
+            message: "Error: Wishlist not found"
+        })
+    }
     
     console.log(error)
     return response.status(500).json({

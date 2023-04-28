@@ -14,7 +14,7 @@ exports.getAllEvent = async (request,response)=>{
 
         return response.json({
             success: true,
-            massage: "List of all category",
+            massage: "List of all Events",
             results: data
         })
     } catch (error) {

@@ -4,6 +4,7 @@ const eventController = require("../controllers/even.controller")
 const validation = require("../middlewares/validator.middlewere")
 
 eventRouter.post("/", uploadMiddleware("picture"), validation("createEvent"), eventController.updateEvent)
-eventRouter.get("/", eventController.getEvent)
+eventRouter.get("/detail", eventController.getEvent)
+eventRouter.get("/", eventController.getAllEvent)
 
 module.exports = eventRouter

@@ -75,13 +75,14 @@ exports.updateWishList = async (request, response)=>{
 exports.deleteWishList = async (request,response)=>{
     try {
         const data = await wishListModel.destroy(request.params.id)
-        if(data){
-            return response.json({
-                success: true,
-                massage: "Delete wishlist successfully",
-                results: data
-            })
+        if(!data){
+            throw Error("wishList_not_found")
         }
+        return response.json({
+            success: true,
+            massage: "Delete wishlist successfully",
+            results: data
+        })
     } catch (error) {
         errorHandler(response, error)
     }

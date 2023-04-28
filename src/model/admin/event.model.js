@@ -85,6 +85,7 @@ exports.findOneByCityId = async function(cityId){
     "e"."picture",
     "e"."title",
     "e"."desciption",
+    "c"."name" as "location",
     "e"."createdAt",
     "e"."updatedAt"
     FROM "${tabel}" "e"
