@@ -64,7 +64,7 @@ exports.findOneByIdParams = async function(id){
     "e"."id",
     "e"."title",
     "ci"."name" as "location",
-    STRING_AGG("c"."name", ', ') as "category",
+    "c"."name" as "category",
     "e"."desciption",
     "e"."date",
     "e"."createdAt",
@@ -73,7 +73,7 @@ exports.findOneByIdParams = async function(id){
     JOIN "events" "e" ON "e"."id" = "ec"."eventId"
     JOIN "categories" "c" ON "c"."id" = "ec"."categoryId"
     JOIN "cities" "ci" ON "ci"."id" = "e"."cityId"
-    GROUP BY "e"."id", "ci"."name"`
+    WHERE "ec"."id"=$1`
 
     const values = [id]
     const {rows} = await db.query(query, values)

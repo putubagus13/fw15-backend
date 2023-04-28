@@ -1,6 +1,5 @@
 const errorHandler = require("../helpers/errorHandler")
 const citiesModel = require("../model/admin/cities.model")
-const eventModel = require("../model/admin/event.model")
 
 exports.getAllCities = async (request, response) => {
     try {
@@ -34,11 +33,7 @@ exports.createCities = async (request, response)=>{
         if(!cities){
             return Error("update_failed")
         }
-      
-        const eventData ={
-            cityId: cities.id
-        }
-        await eventModel.insert(eventData)
+    
         return response.json({
             success: true,
             masssage: "create city successfuly",

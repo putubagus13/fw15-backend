@@ -5,7 +5,7 @@ exports.getEventCategories = async (request, response) => {
     try {
         const eventCategories = await eventCategoriesModel.findOneByIdParams(request.params.id)
         if(!eventCategories){
-            throw Error("profile_not_found")
+            throw Error("event_category_not_found")
         }
         return response.json({
             success: true,

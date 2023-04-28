@@ -80,13 +80,14 @@ exports.findOneByUserId = async function(userId){
     "e"."picture",
     "e"."title",
     "e"."date",
-    "e"."cityId",
+    "c"."name" as "location",
     "e"."desciption",
     "w"."createdAt",
     "w"."updatedAt"
     FROM "${table}" "w"
     JOIN "users" "u" ON "u"."id" = "w"."userId"
     JOIN "events" "e" ON "e".id = "w"."eventId"
+    JOIN "cities" "c" ON "c".id = "e"."cityId"
     WHERE "w"."userId"=$1`
 
     const values = [userId]

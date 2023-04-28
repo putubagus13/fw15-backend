@@ -1,6 +1,5 @@
 const citiesModel = require("../../model/admin/cities.model")
 const errorHandler = require("../../helpers/errorHandler")
-const eventModel = require("../../model/admin/event.model")
 const argon = require("argon2")
 
 exports.getAllCities = async (request,response)=>{
@@ -39,10 +38,6 @@ exports.createCities = async (request, response)=>{
             return Error("update_failed")
         }
         
-        const eventData ={
-            cityId: cities.id
-        }
-        await eventModel.insert(eventData)
         return response.json({
             success: true,
             masssage: "create city successfuly",

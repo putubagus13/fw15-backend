@@ -151,6 +151,13 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if (error.message === "event_category_not_found") {
+        return response.status(404).json({
+            success: false,
+            message: "event category not found"
+        })
+    }
+
     if (error.message === "wishList_not_found") {
         return response.status(404).json({
             success: false,
