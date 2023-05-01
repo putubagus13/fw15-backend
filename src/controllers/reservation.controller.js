@@ -4,34 +4,24 @@ const reservationStatusModel = require("../model/admin/reservationStatus.model")
 const eventModel = require("../model/admin/event.model")
 const paymentMethodModel = require("../model/admin/paymentMethod.model")
 
-const argon = require("argon2")
+exports.getAllReservation = async (request,response)=>{
+    try {
+        const data = await reservationModel.findAll(
+            request.query.page, 
+            request.query.limit, 
+            request.query.search, 
+            request.query.sort, 
+            request.query.sortBy)
 
-exports.createResReservation = async (request, response)=>{
-    try{
-        const data = {
-            ...request.body
-        }
-        if(request.body.password){
-            data.password = await argon.hash(request.body.password)
-        }
-
-        if(request.file){
-            data.picture = request.file.filename
-        }
-        const reservation = await reservationModel.insert(data)
-        if(!reservation){
-            return Error("update_failed")
-        }
         return response.json({
             success: true,
-            masssage: "create reservation successfuly",
-            result: reservation
+            massage: "List of all reservation section",
+            results: data
         })
-    }catch(error){
+    } catch (error) {
         return errorHandler(response, error)
     }
 }
-
 exports.updateReservation = async (request, response)=>{
     try {
         const {id} = request.user
