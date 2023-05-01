@@ -31,12 +31,28 @@ exports.update = async function(id, data){
     UPDATE "${teble}" 
     SET 
     "eventId"= COALESCE(NULLIF($2::INTEGER, NULL), "eventId"),
+    "userId"= COALESCE(NULLIF($3::INTEGER, NULL), "userId"),
     "status"= COALESCE(NULLIF($4::INTEGER, NULL), "status"),
     "paymentMethodId"= COALESCE(NULLIF($5::INTEGER, NULL), "paymentMethodId")
      WHERE "id"=$1
     RETURNING *
     `
     const values = [id, data.eventId, data.userId, data.status, data.paymentMethodId]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+} 
+
+exports.updateByUserId = async function(userId, data){
+    const query = `
+    UPDATE "${teble}" 
+    SET 
+    "eventId"= COALESCE(NULLIF($2::INTEGER, NULL), "eventId"),
+    "status"= COALESCE(NULLIF($4::INTEGER, NULL), "status"),
+    "paymentMethodId"= COALESCE(NULLIF($5::INTEGER, NULL), "paymentMethodId")
+    WHERE "userId"=$1
+    RETURNING *
+    `
+    const values = [userId, data.eventId, data.status, data.paymentMethodId]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 

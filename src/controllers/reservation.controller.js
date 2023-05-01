@@ -50,7 +50,7 @@ exports.updateReservation = async (request, response)=>{
         const data = {
             ...request.body
         }
-        const reservation = await reservationModel.update(id, data)
+        const reservation = await reservationModel.updateByUserId(id, data)
         if(!reservation){
             return Error("update_failed")
         }
