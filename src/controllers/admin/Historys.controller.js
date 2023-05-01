@@ -1,10 +1,10 @@
-const eventCategoryModel = require("../../model/admin/eventCategories.model")
+const historysModel = require("../../model/admin/historys.model")
 const errorHandler = require("../../helpers/errorHandler")
 const argon = require("argon2")
 
-exports.getAllEventCategory = async (request,response)=>{
+exports.getAllHistory = async (request,response)=>{
     try {
-        const data = await eventCategoryModel.findAll(
+        const data = await historysModel.findAll(
             request.query.page, 
             request.query.limit, 
             request.query.search, 
@@ -13,7 +13,7 @@ exports.getAllEventCategory = async (request,response)=>{
 
         return response.json({
             success: true,
-            massage: "List of all event category",
+            massage: "List of all History section",
             results: data
         })
     } catch (error) {
@@ -21,7 +21,7 @@ exports.getAllEventCategory = async (request,response)=>{
     }
 }
 
-exports.createEventCategory = async (request, response)=>{
+exports.createHistory = async (request, response)=>{
     try{
         const data = {
             ...request.body
@@ -33,74 +33,70 @@ exports.createEventCategory = async (request, response)=>{
         if(request.file){
             data.picture = request.file.filename
         }
-        const event = await eventCategoryModel.insert(data)
-        if(!event){
+        const history = await historysModel.insert(data)
+        if(!history){
             return Error("update_failed")
         }
         return response.json({
             success: true,
-            masssage: "create event category successfuly",
-            result: event
+            masssage: "create History successfuly",
+            result: history
         })
     }catch(error){
         return errorHandler(response, error)
     }
 }
 
-exports.updateEventCategory = async (request, response)=>{
+exports.updateHistory = async (request, response)=>{
     try {
         const data = {
             ...request.body
         }
-        if(request.body.password){
-            data.password = await argon.hash(request.body.password)
-        }
-        if(request.file){
-            data.picture = request.file.filename
-        }
-        const event = await eventCategoryModel.update(request.params.id, data)
-        if(!event){
+      
+        const wishList = await historysModel.update(request.params.id, data)
+        if(!wishList){
             return Error("update_failed")
         }
         return response.json({
             success: true,
-            message: "Update event category Success!",
-            results: event
+            message: "Update history Success!",
+            results: wishList
         })
     } catch (error) {
         return errorHandler(response,error)
     }
 }
 
-exports.deleteEventCategory = async (request,response)=>{
+exports.deleteHistory = async (request,response)=>{
     try {
-        const data = await eventCategoryModel.destroy(request.params.id)
-        if(data){
-            return response.json({
-                success: true,
-                massage: "Delete event category successfully",
-                results: data
-            })
+        const data = await historysModel.destroy(request.params.id)
+        if(!data){
+            throw Error("history_not_found")
         }
+        return response.json({
+            success: true,
+            massage: "Delete history successfully",
+            results: data
+        })
     } catch (error) {
         errorHandler(response, error)
     }
-   
+  
 }
 
 exports.getOne = async (request,response)=>{
     try {
-        const data = await eventCategoryModel.findOne(request.params.id)
+        const data = await historysModel.findOne(request.params.id)
         if(data){
             return response.json({
                 success: true,
-                massage: "Detail users",
+                massage: "Detail of history",
                 results: data
             })
         }
     } catch (error) {
         errorHandler(response, error)
     }
-}
 
+}
 

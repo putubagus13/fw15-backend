@@ -164,6 +164,13 @@ const errrorHendle = (response, error)=>{
             message: "Error: Wishlist not found"
         })
     }
+
+    if (error.message === "event_not_found") {
+        return response.status(404).json({
+            success: false,
+            message: "Error: Event not found"
+        })
+    }
     
     console.log(error)
     return response.status(500).json({

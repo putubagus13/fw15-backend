@@ -34,7 +34,7 @@ exports.updateEvent = async (request, response) => {
             }
             data.picture =  request.file.filename
         }
-        const eventData = await eventModel.updateByCityId(request.params.id, data)
+        const eventData = await eventModel.update(request.params.id, data)
         if(!eventData){
             throw Error ("event_update_failed")
         }
@@ -57,7 +57,7 @@ exports.getEvent = async (request, response) => {
         const {cityId} = request.body
         const event = await eventModel.findOneByCityId(cityId)
         if(!event){
-            throw Error("profile_not_found")
+            throw Error("event_not_found")
         }
         return response.json({
             success: true,
