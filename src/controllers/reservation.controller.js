@@ -34,6 +34,7 @@ exports.createResReservation = async (request, response)=>{
 
 exports.updateReservation = async (request, response)=>{
     try {
+        const {id} = request.user
         const events = await eventModel.findOne(request.body.eventId)
         if(!events){
             throw Error("event_not_found")
@@ -49,7 +50,7 @@ exports.updateReservation = async (request, response)=>{
         const data = {
             ...request.body
         }
-        const reservation = await reservationModel.update(request.params.id, data)
+        const reservation = await reservationModel.update(id, data)
         if(!reservation){
             return Error("update_failed")
         }
