@@ -185,10 +185,10 @@ const errrorHendle = (response, error)=>{
         })
     }
 
-    if (error.message === "paymentMethod_not_found") {
+    if (error.message === "reservation_not_found") {
         return response.status(404).json({
             success: false,
-            message: "Error: Payment Method not found"
+            message: "Error: Reservation not found"
         })
     }
     
