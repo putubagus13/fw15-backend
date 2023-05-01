@@ -1,6 +1,5 @@
 const eventModel = require("../../model/admin/event.model")
 const errorHandler = require("../../helpers/errorHandler")
-const eventCategoriesModel = require("../../model/admin/eventCategories.model")
 const argon = require("argon2")
 
 exports.getAllEvent = async (request,response)=>{
@@ -66,11 +65,7 @@ exports.updateEvent = async (request, response)=>{
         if(!event){
             return Error("update_failed")
         }
-      
-        const eventCategoryData ={
-            eventId: events.id
-        }
-        await eventCategoriesModel.insert(eventCategoryData)
+    
         return response.json({
             success: true,
             message: "Update event Success!",

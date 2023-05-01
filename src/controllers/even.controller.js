@@ -1,5 +1,4 @@
 const eventModel = require("../model/admin/event.model")
-const eventCategoriesModel = require("../model/admin/eventCategories.model")
 const errorHandler = require("../helpers/errorHandler")
 const fileRemover = require("../helpers/fileRemover.helpers")
 
@@ -64,10 +63,7 @@ exports.updateEvent = async (request, response) => {
         if(!eventData){
             throw Error ("event_update_failed")
         }
-        const eventCategoryData ={
-            eventId: events.id
-        }
-        await eventCategoriesModel.insert(eventCategoryData)
+
         return response.json({
             success: true,
             message: "Event success edited",
