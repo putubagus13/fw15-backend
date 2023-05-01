@@ -6,7 +6,7 @@ const userModel = require("../model/admin/users.model")
 exports.updateProfile = async (request, response) => {
     try {
         const {id} = request.user
-        const user = await profileModel.findOne(id)
+        const user = await profileModel.findOneByUserId(id)
         const data = {
             ...request.body
         }
@@ -46,6 +46,7 @@ exports.updateProfile = async (request, response) => {
 exports.getProfile = async (request, response) => {
     try {
         const {id} = request.user
+        console.log(id)
         const profile = await profileModel.findOneByUserId(id)
         if(!profile){
             throw Error("profile_not_found")
