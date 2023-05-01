@@ -44,7 +44,7 @@ exports.update = async function(id, data){
     return rows[0]
 } 
 
-exports.updateByCityId = async function(cityId, data){
+exports.updateById = async function(id, data){
     const query = `
     UPDATE "${tabel}" 
     SET 
@@ -52,10 +52,10 @@ exports.updateByCityId = async function(cityId, data){
     "title"= COALESCE(NULLIF($3,''), "title"),
     "date"= COALESCE(NULLIF($4::DATE, NULL), "date"),
     "desciption"= COALESCE(NULLIF($5,''), "desciption")
-    WHERE "cityId"=$1
+    WHERE id=$1
     RETURNING *
     `
-    const values = [cityId, data.picture, data.title, data.date, data.desciption]
+    const values = [id, data.picture, data.title, data.date, data.desciption]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
