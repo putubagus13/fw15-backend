@@ -76,8 +76,8 @@ exports.findOneByIdUserId = async function(userId){
     "r"."createdAt",
     "r"."updatedAt"
     FROM "${teble}" "r"
-    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     JOIN "events" "e" ON "e"."id" = "r"."eventId"
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     JOIN "reservationStatus" "rs" ON "rs"."id" = "r"."status"
     JOIN "paymentMethod" "pm" ON "pm"."id" = "r"."paymentMethodId"
     JOIN "users" "u" ON "u"."id" = "r"."userId"
