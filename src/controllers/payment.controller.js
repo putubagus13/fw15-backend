@@ -1,6 +1,25 @@
 const paymentMethodModel = require("../model/admin/paymentMethod.model")
 const errorHandler = require("../helpers/errorHandler")
 
+exports.getAllPayment = async (request,response)=>{
+    try {
+        const data = await paymentMethodModel.findAll(
+            request.query.page, 
+            request.query.limit, 
+            request.query.search, 
+            request.query.sort, 
+            request.query.sortBy)
+
+        return response.json({
+            success: true,
+            massage: "List of all payment method",
+            results: data
+        })
+    } catch (error) {
+        return errorHandler(response, error)
+    }
+}
+
 exports.createPayment = async (request, response)=>{
     try{
         const data = {
