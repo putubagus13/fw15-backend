@@ -6,7 +6,7 @@ const userModel = require("../model/admin/users.model")
 exports.updateProfile = async (request, response) => {
     try {
         const {id} = request.user
-        const user = await profileModel.findOneByUserId(id)
+        const user = await profileModel.findOne(id)
         const data = {
             ...request.body
         }

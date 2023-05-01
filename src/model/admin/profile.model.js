@@ -74,11 +74,11 @@ exports.destroy = async function(id){
     return rows[0]
 } 
 
-exports.findOne = async function(id){
+exports.findOne = async function(userId){
     const query =`
-    SELECT * FROM "${table}" WHERE id=$1`
+    SELECT * FROM "${table}" WHERE "userId"=$1`
 
-    const values = [id]
+    const values = [userId]
     const {rows} = await db.query(query, values)
     return rows[0]
 }
