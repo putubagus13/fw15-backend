@@ -171,6 +171,26 @@ const errrorHendle = (response, error)=>{
             message: "Error: Event not found"
         })
     }
+
+    if (error.message === "status_not_found") {
+        return response.status(404).json({
+            success: false,
+            message: "Error: Status not found"
+        })
+    }
+    if (error.message === "paymentMethod_not_found") {
+        return response.status(404).json({
+            success: false,
+            message: "Error: Payment Method not found"
+        })
+    }
+
+    if (error.message === "paymentMethod_not_found") {
+        return response.status(404).json({
+            success: false,
+            message: "Error: Payment Method not found"
+        })
+    }
     
     console.log(error)
     return response.status(500).json({
