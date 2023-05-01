@@ -51,11 +51,12 @@ exports.updateById = async function(id, data){
     "picture"= COALESCE(NULLIF($2,''), "picture"),
     "title"= COALESCE(NULLIF($3,''), "title"),
     "date"= COALESCE(NULLIF($4::DATE, NULL), "date"),
-    "desciption"= COALESCE(NULLIF($5,''), "desciption")
+    "cityId"= COALESCE(NULLIF($5::INTEGER, NULL), "cityId"),
+    "desciption"= COALESCE(NULLIF($6,''), "desciption")
     WHERE id=$1
     RETURNING *
     `
-    const values = [id, data.picture, data.title, data.date, data.desciption]
+    const values = [id, data.picture, data.title, data.date, data.cityId, data.desciption]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 

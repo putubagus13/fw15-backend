@@ -68,7 +68,7 @@ exports.updateEvent = async (request, response) => {
             }
             data.picture =  request.file.filename
         }
-        const eventData = await eventModel.updateById(request.params.id, data)
+        const eventData = await eventModel.update(request.params.id, data)
         if(!eventData){
             throw Error ("event_update_failed")
         }
