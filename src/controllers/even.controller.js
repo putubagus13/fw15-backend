@@ -55,6 +55,10 @@ exports.updateEvent = async (request, response) => {
         if(!events){
             throw Error("event_not_found")
         } 
+        const cityId = await citiesModel.findOne(request.body.cityId)
+        if(!cityId){
+            throw Error("city_not_found")
+        }
         const data = {
             ...request.body
         }
