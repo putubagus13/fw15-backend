@@ -1,6 +1,7 @@
 const eventModel = require("../model/admin/event.model")
 const errorHandler = require("../helpers/errorHandler")
 const fileRemover = require("../helpers/fileRemover.helpers")
+const citiesModel = require("../model/admin/cities.model")
 
 exports.getAllEvent = async (request,response)=>{
     try {
@@ -23,6 +24,10 @@ exports.getAllEvent = async (request,response)=>{
 
 exports.addEvent = async (request, response)=>{
     try{
+        const cityId = await citiesModel.findOne(request.body.cityId)
+        if(!cityId){
+            throw Error("city_not_found")
+        }
         const data = {
             ...request.body
         }
