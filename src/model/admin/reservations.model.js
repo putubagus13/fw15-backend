@@ -11,7 +11,7 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
     const query= `
     SELECT * FROM "${teble}" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
 
-    const values = [limit, offset, `%${search}%`]
+    const values = [limit, offset]
     const {rows} = await db.query(query,values)
     return rows
 }
