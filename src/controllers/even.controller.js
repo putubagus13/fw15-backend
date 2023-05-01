@@ -24,7 +24,10 @@ exports.getAllEvent = async (request,response)=>{
 
 exports.updateEvent = async (request, response) => {
     try {
-        const events = await eventModel.findOne(request.params.id) 
+        const events = await eventModel.findOne(request.params.id)
+        if(!events){
+            throw Error("event_not_found")
+        } 
         const data = {
             ...request.body
         }
