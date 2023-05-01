@@ -31,7 +31,6 @@ exports.update = async function(id, data){
     UPDATE "${teble}" 
     SET 
     "eventId"= COALESCE(NULLIF($2::INTEGER, NULL), "eventId"),
-    "userId"= COALESCE(NULLIF($3::INTEGER, NULL), "userId"),
     "status"= COALESCE(NULLIF($4::INTEGER, NULL), "status"),
     "paymentMethodId"= COALESCE(NULLIF($5::INTEGER, NULL), "paymentMethodId")
      WHERE "id"=$1
