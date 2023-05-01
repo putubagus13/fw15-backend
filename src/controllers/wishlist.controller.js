@@ -60,3 +60,20 @@ exports.getByUserId = async (request, response)=>{
     }
 }
 
+exports.deleteWishList = async (request,response)=>{
+    try {
+        const data = await wishListModel.destroy(request.user)
+        if(!data){
+            throw Error("wishList_not_found")
+        }
+        return response.json({
+            success: true,
+            massage: "Delete wishlist successfully",
+            results: data
+        })
+    } catch (error) {
+        return errorHendler(response, error)
+    }
+  
+}
+
