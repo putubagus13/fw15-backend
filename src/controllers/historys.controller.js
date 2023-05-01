@@ -9,7 +9,7 @@ exports.getReservationDetail = async (request, response) => {
         }
         return response.json({
             success: true,
-            message: "Reservation",
+            message: "Detail reservation history",
             results: reservation
         })
     } catch(error) {
