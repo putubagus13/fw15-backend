@@ -22,6 +22,29 @@ exports.getAllEvent = async (request,response)=>{
     }
 }
 
+exports.addEvent = async (request, response)=>{
+    try{
+        const data = {
+            ...request.body
+        }
+        if(request.file){
+            data.picture = request.file.filename
+        }
+        const event = await eventModel.insert(data)
+        if(!event){
+            return Error("update_failed")
+        }
+      
+        return response.json({
+            success: true,
+            masssage: "create event successfuly",
+            result: event
+        })
+    }catch(error){
+        return errorHandler(response, error)
+    }
+}
+
 exports.updateEvent = async (request, response) => {
     try {
         const events = await eventModel.findOne(request.params.id)
