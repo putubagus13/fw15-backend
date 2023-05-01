@@ -35,6 +35,7 @@ exports.createResReservation = async (request, response)=>{
 exports.updateReservation = async (request, response)=>{
     try {
         const {id} = request.user
+        console.log(id)
         const events = await eventModel.findOne(request.body.eventId)
         if(!events){
             throw Error("event_not_found")
