@@ -59,3 +59,32 @@ exports.findOne = async function(id){
     const {rows} = await db.query(query, values)
     return rows[0]
 }
+
+exports.findOneByIdUserId = async function(userId){
+    const query =`
+    SELECT
+    "r"."id",
+    "u"."username",
+    "u"."email",
+    "e"."picture",
+    "e"."title",
+    "e"."date",
+    "c"."name" as "location",
+    "e"."desciption",
+    "rs"."name" as "status",
+    "pm"."name" as "PaymentMetode",
+    "r"."createdAt",
+    "r"."updatedAt"
+    FROM "${teble}" "r"
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    JOIN "events" "e" ON "e"."id" = "r"."eventId"
+    JOIN "reservationStatus" "rs" ON "rs"."id" = "r"."status"
+    JOIN "paymentMethod" "pm" ON "pm"."id" = "r"."paymentMethodId"
+    JOIN "users" "u" ON "u"."id" = "r"."userId"
+    WHERE "r"."userId"=$1`
+
+    const values = [userId]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}
+
