@@ -24,6 +24,15 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
+exports.findByUserName = async function(username){
+    const query =`
+    SELECT * FROM "users" WHERE "username"=$1`
+
+    const values = [username]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}
+
 exports.insert = async function(data){
     const query = `
     INSERT INTO "users" ("username", "email", "password")

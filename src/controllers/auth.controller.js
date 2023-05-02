@@ -1,9 +1,7 @@
 const errorHendle = require("../helpers/errorHandler")
 const userModel = require("../model/admin/users.model")
 const profileModel = require("../model/admin/profile.model")
-const reservationModel = require("../model/admin/reservations.model")
 const forgotRequestModel = require("../model/admin/forgotRequest.model")
-const wishListModel = require("../model/admin/wishlist.model")
 const jwt = require("jsonwebtoken")
 const {APP_SECRET}= process.env
 const argon = require("argon2")
@@ -33,7 +31,7 @@ exports.login = async (request, response)=>{
 
 exports.register = async (request, response)=>{
     try {
-        const {fullName, password, confirmPassword }= request.body
+        const {fullName,username, password, confirmPassword }= request.body
         if( password !== confirmPassword){
             throw Error("password_unmatch")
         }
@@ -42,28 +40,31 @@ exports.register = async (request, response)=>{
             ...request.body,
             password: hash
         }
-        const user = await userModel.insert(data)
-        const profileData = {
-            fullName, 
-            userId: user.id
-        }
-        
-        const reservationData = {
-            userId: user.id
+        if(data.acceptTermsAndCondition == 1){
+            const UsernameExist = await userModel.findByUserName(username)
+            //console.log(UsernameExist.username)
+            console.log(data.username)
+            if(!UsernameExist){
+                const user = await userModel.insert(data)
+                const profileData = {
+                    fullName, 
+                    userId: user.id
+                }
+                await profileModel.insert(profileData)
+                const token = jwt.sign({id: user.id}, APP_SECRET)
+                return response.json({
+                    success: true,
+                    message: "Register Success!",
+                    results: (token)
+                })
+            }
+            if(UsernameExist.username == data.username){
+                throw Error("username_alredy_exist")
+            }
+        }else{
+            throw Error("make sure you agree to the terms")
         }
 
-        const wishListData = {
-            userId: user.id
-        }
-        await profileModel.insert(profileData)
-        await reservationModel.insert(reservationData)
-        await wishListModel.insert(wishListData)
-        const token = jwt.sign({id: user.id}, APP_SECRET)
-        return response.json({
-            success: true,
-            message: "Register Success!",
-            results: (token)
-        })
     } catch (error) {
         return errorHendle(response,error)
     }

@@ -5,6 +5,20 @@ const errrorHendle = (response, error)=>{
             message: "Error email already used!"
         })
     }
+    if(error?.message?.includes("username_alredy_exist")){
+        return response.status(409).json({
+            success: false,
+            message: "Username alredy exist"
+        })
+    }
+
+    if(error?.message?.includes("make sure you agree to the terms")){
+        return response.status(409).json({
+            success: false,
+            message: "make sure you agree to the terms"
+        })
+    }
+
     if(error?.message?.includes("empty_failed")){
         return response.status(400).json({
             success: false,
