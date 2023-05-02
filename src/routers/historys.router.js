@@ -1,6 +1,6 @@
 const historyRouter = require("express").Router()
-const reservationController = require("../controllers/reservation.controller")
+const historyController = require("../controllers/historys.controller")
 
-historyRouter.get("/detail", reservationController.getReservationDetail)
+historyRouter.get("/detail", historyController.getReservationDetail)
 
 module.exports = historyRouter
