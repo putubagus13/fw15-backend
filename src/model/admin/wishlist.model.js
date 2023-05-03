@@ -88,9 +88,9 @@ exports.findOneByUserId = async function(userId){
     JOIN "users" "u" ON "u"."id" = "w"."userId"
     JOIN "events" "e" ON "e".id = "w"."eventId"
     JOIN "cities" "c" ON "c".id = "e"."cityId"
-    WHERE "w"."userId"=$1`
-
+    WHERE "w"."userId"=$1
+    `
     const values = [userId]
     const {rows} = await db.query(query, values)
-    return rows[0]
+    return rows
 }
