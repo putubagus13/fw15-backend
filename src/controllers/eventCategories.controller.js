@@ -1,15 +1,18 @@
 const eventCategoriesModel = require("../model/admin/eventCategories.model")
 const errorHandler = require("../helpers/errorHandler")
 
-exports.getEventCategories = async (request, response) => {
+exports.updateEventCategory = async (request, response) => {
     try {
-        const eventCategories = await eventCategoriesModel.findOneByIdParams(request.params.id)
+        const data = {
+            ...request.body
+        }
+        const eventCategories = await eventCategoriesModel.update(request.params.id, data)
         if(!eventCategories){
             throw Error("event_category_not_found")
         }
         return response.json({
             success: true,
-            message: "Events",
+            message: "Events update success",
             results: eventCategories
         })
     } catch(error) {

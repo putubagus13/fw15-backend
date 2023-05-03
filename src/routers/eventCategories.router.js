@@ -1,6 +1,6 @@
 const eventCategoriesRouter = require("express").Router()
 const eventCategoriesController = require("../controllers/eventCategories.controller")
 
-eventCategoriesRouter.get("/:id", eventCategoriesController.getEventCategories)
+eventCategoriesRouter.post("/:id", eventCategoriesController.updateEventCategory)
 
 module.exports = eventCategoriesRouter
