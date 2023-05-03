@@ -103,7 +103,7 @@ const errrorHendle = (response, error)=>{
         })
     }
 
-    if(error?.message?.includes("wishlist_not_found")){
+    if(error?.message?.includes("lwishist_not_found")){
         return response.status(400).json({
             success: false,
             message: "Error: wishlist not found"
@@ -141,6 +141,13 @@ const errrorHendle = (response, error)=>{
         return response.status(404).json({
             success: false,
             message: "Update profile failed"
+        })
+    }
+
+    if (error.message === "wishlist_failed") {
+        return response.status(404).json({
+            success: false,
+            message: "Create wishlist failed"
         })
     }
 
@@ -203,6 +210,13 @@ const errrorHendle = (response, error)=>{
         return response.status(404).json({
             success: false,
             message: "Error: Reservation not found"
+        })
+    }
+
+    if (error.message === "Payment method not found") {
+        return response.status(404).json({
+            success: false,
+            message: "Payment method not found"
         })
     }
     
