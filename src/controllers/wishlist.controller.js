@@ -1,6 +1,5 @@
 const wishListModel = require("../model/admin/wishlist.model")
 const errorHendler = require("../helpers/errorHandler")
-const userModel = require("../model/admin/users.model")
 
 exports.getAll = async (request, response)=>{
     try {
@@ -22,36 +21,37 @@ exports.getAll = async (request, response)=>{
     }
 
 }
-
-exports.updateWishlist = async (request, response) =>{
-    try {
-        const {id} = request.user
-        const user = await userModel.findOne(id)
-        if(!user){
-            throw Error("update_failed")
+exports.createWishList = async (request, response)=>{
+    try{
+        const data = {
+            ...request.body,
+            userId: request.user.id
         }
-        const data = await wishListModel.updateByUserId(id, request.body)
-        response.json({
-            success: true,
-            message: "Wishlist success update",
-            result: data
-        })
-
-    } catch (error) {
-        return errorHendler(response,error)
-    }
-}
-
-exports.getByUserId = async (request, response)=>{
-    try {
-        const {id} = request.user
-        const wishList = await wishListModel.findOneByUserId(id)
+        const wishList = await wishListModel.insert(data)
         if(!wishList){
-            throw Error("wishlist_not_found")
+            return Error("wishlist_failed")
         }
         return response.json({
             success: true,
-            message: "wishlist",
+            masssage: "create wishList successfuly",
+            result: wishList
+        })
+    }catch(error){
+        return errorHendler(response, error)
+    }
+}
+
+
+exports.getDetailWishlist = async (request, response)=>{
+    try {
+        console.log(request.params.id)
+        const wishList = await wishListModel.findOneByUserId(request.params.id)
+        if(!wishList){
+            throw Error("wishList_not_found")
+        }
+        return response.json({
+            success: true,
+            message: "wishlist Detail",
             result: wishList
         })
 
@@ -62,7 +62,7 @@ exports.getByUserId = async (request, response)=>{
 
 exports.deleteWishList = async (request,response)=>{
     try {
-        const data = await wishListModel.destroy(request.user)
+        const data = await wishListModel.destroy(request.params.id)
         if(!data){
             throw Error("wishList_not_found")
         }
