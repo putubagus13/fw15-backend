@@ -43,6 +43,7 @@ exports.addEvent = async (request, response)=>{
         }
 
         const eventIdData = {
+            ...request.body,
             eventId: event.id
         }
         await eventCategoriesModel.insert(eventIdData)
