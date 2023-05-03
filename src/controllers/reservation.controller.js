@@ -1,8 +1,9 @@
 const reservationModel = require("../model/admin/reservations.model")
 const errorHandler = require("../helpers/errorHandler")
-const reservationStatusModel = require("../model/admin/reservationStatus.model")
+//const reservationStatusModel = require("../model/admin/reservationStatus.model")
 const eventModel = require("../model/admin/event.model")
-const paymentMethodModel = require("../model/admin/paymentMethod.model")
+//const paymentMethodModel = require("../model/admin/paymentMethod.model")
+const reservationTicketModel = require("../model/admin/reservationTickets.model")
 
 exports.getAllReservation = async (request,response)=>{
     try {
@@ -22,29 +23,36 @@ exports.getAllReservation = async (request,response)=>{
         return errorHandler(response, error)
     }
 }
-exports.updateReservation = async (request, response)=>{
+exports.createReservation = async (request, response)=>{
     try {
         const {id} = request.user
-        console.log(id)
         const events = await eventModel.findOne(request.body.eventId)
         if(!events){
             throw Error("event_not_found")
         } 
-        const status = await reservationStatusModel.findOne(request.body.status)
-        if(!status){
-            throw Error("status_not_found")
-        } 
-        const paymentId = await paymentMethodModel.findOne(request.body.paymentMethodId)
-        if(!paymentId){
-            throw Error("paymentMethod_not_found")
-        } 
+        // const status = await reservationStatusModel.findOne(request.body.status)
+        // if(!status){
+        //     throw Error("status_not_found")
+        // } 
+        // const paymentId = await paymentMethodModel.findOne(request.body.paymentMethodId)
+        // if(!paymentId){
+        //     throw Error("paymentMethod_not_found")
+        // } 
         const data = {
-            ...request.body
+            ...request.body,
+            userId: id
         }
-        const reservation = await reservationModel.updateByUserId(id, data)
+        const reservation = await reservationModel.insert(data)
         if(!reservation){
             return Error("update_failed")
         }
+
+        const reservationData = {
+            ...request.body,
+            resevationId: reservation.id
+        }
+
+        await reservationTicketModel.insert(reservationData)
         return response.json({
             success: true,
             message: "Update reservation Success!",

@@ -75,7 +75,7 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
-exports.findOneByIdUserId = async function(userId){
+exports.findOneByIdReservationId = async function(id){
     const query =`
     SELECT
     "r"."id",
@@ -86,19 +86,18 @@ exports.findOneByIdUserId = async function(userId){
     "e"."date",
     "c"."name" as "location",
     "e"."desciption",
-    "rs"."name" as "status",
+    "r"."status",
     "pm"."name" as "PaymentMetode",
     "r"."createdAt",
     "r"."updatedAt"
     FROM "${teble}" "r"
     JOIN "events" "e" ON "e"."id" = "r"."eventId"
-    JOIN "reservationStatus" "rs" ON "rs"."id" = "r"."status"
     JOIN "paymentMethod" "pm" ON "pm"."id" = "r"."paymentMethodId"
     JOIN "users" "u" ON "u"."id" = "r"."userId"
     JOIN "cities" "c" ON "c"."id" = "e"."cityId"
-    WHERE "r"."userId"=$1`
+    WHERE "r"."id"=$1`
 
-    const values = [userId]
+    const values = [id]
     const {rows} = await db.query(query, values)
     return rows[0]
 }
