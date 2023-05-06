@@ -10,7 +10,23 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
     const query= `
-    SELECT * FROM "${tabel}" WHERE "title" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
+    SELECT
+    "e"."id",
+    "e"."picture",
+    "e"."title",
+    "e"."desciption",
+    "e"."date",
+    "c"."name" as "location",
+    "ct"."name" as "category",
+    "e"."createdAt",
+    "e"."updatedAt"
+    FROM "${tabel}" "e"
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    JOIN "eventCategories" "ec" ON "ec"."eventId" = "e"."id"
+    JOIN "categories" "ct" ON "ct"."id" = "ec"."categoryId"
+    WHERE "title" LIKE $3
+    ORDER BY ${sort} ${sortBy} 
+    LIMIT $1 OFFSET $2`
 
     const values = [limit, offset, `%${search}%`]
     const {rows} = await db.query(query,values)
@@ -104,6 +120,7 @@ exports.findOne = async function(id){
     "e"."picture",
     "e"."title",
     "e"."desciption",
+    "e"."date
     "c"."name" as "location",
     "ct"."name" as "category",
     "e"."createdAt",
@@ -136,6 +153,7 @@ exports.findOneByUserId = async function(id, createdBy){
     "e"."picture",
     "e"."title",
     "e"."desciption",
+    "e"."date",
     "c"."name" as "location",
     "ct"."name" as "category",
     "e"."createdAt",

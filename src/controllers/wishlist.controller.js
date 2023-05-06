@@ -46,6 +46,7 @@ exports.getDetailWishlist = async (request, response)=>{
     try {
         console.log(request.params.id)
         const wishList = await wishListModel.findOneByUserId(request.params.id)
+        console.log(wishList)
         if(!wishList){
             throw Error("wishList_not_found")
         }

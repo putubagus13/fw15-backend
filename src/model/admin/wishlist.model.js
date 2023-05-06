@@ -71,7 +71,7 @@ exports.updateByUserId = async (userId, data)=>{
     return rows[0]
 }
 
-exports.findOneByUserId = async function(userId){
+exports.findOneByUserId = async function(id){
     const query =`
     SELECT  
     "u"."id",
@@ -88,9 +88,9 @@ exports.findOneByUserId = async function(userId){
     JOIN "users" "u" ON "u"."id" = "w"."userId"
     JOIN "events" "e" ON "e".id = "w"."eventId"
     JOIN "cities" "c" ON "c".id = "e"."cityId"
-    WHERE "w"."userId"=$1
+    WHERE "w". "id"=$1
     `
-    const values = [userId]
+    const values = [id]
     const {rows} = await db.query(query, values)
-    return rows
+    return rows[0]
 }
