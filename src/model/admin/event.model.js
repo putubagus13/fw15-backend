@@ -2,10 +2,12 @@ const db = require("../../helpers/db.helper")
 
 const tabel = "events"
 
-exports.findAll = async function(page, limit, search, sort, sortBy){
+exports.findAll = async function(page, limit, search, category, location, sort, sortBy){
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
     search = search || ""
+    category = category || ""
+    location = location || ""
     sort = sort || "id"
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
@@ -24,15 +26,16 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
     JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     JOIN "eventCategories" "ec" ON "ec"."eventId" = "e"."id"
     JOIN "categories" "ct" ON "ct"."id" = "ec"."categoryId"
-    WHERE "title" LIKE $3
+    WHERE "title" LIKE $1
+    AND "ct"."name" LIKE $2
+    AND "c"."name" LIKE $3
     ORDER BY ${sort} ${sortBy} 
-    LIMIT $1 OFFSET $2`
+    LIMIT $4 OFFSET $5`
 
-    const values = [limit, offset, `%${search}%`]
+    const values = [`%${search}%`, `%${category}%`, `%${location}%`, limit, offset]
     const {rows} = await db.query(query,values)
     return rows
 }
-
 exports.insert = async function(data){
     const query = `
     INSERT INTO "${tabel}" ("picture", "title", "date", "cityId", "desciption")
@@ -138,8 +141,21 @@ exports.findOne = async function(id){
 
 exports.findOneManage = async function(createdBy){
     const query =`
-    SELECT * FROM "${tabel}" 
-    WHERE "createdBy"=$1`
+    SELECT  
+    "e"."id",
+    "e"."picture",
+    "e"."title",
+    "e"."desciption",
+    "e"."date",
+    "c"."name" as "location",
+    "ct"."name" as "category",
+    "e"."createdAt",
+    "e"."updatedAt"
+    FROM "${tabel}" "e"
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    JOIN "eventCategories" "ec" ON "ec"."eventId" = "e"."id"
+    JOIN "categories" "ct" ON "ct"."id" = "ec"."categoryId" 
+    WHERE "e"."createdBy"=$1`
 
     const values = [createdBy]
     const {rows} = await db.query(query, values)

@@ -9,7 +9,9 @@ exports.getAllEvent = async (request,response)=>{
         const data = await eventModel.findAll(
             request.query.page, 
             request.query.limit, 
-            request.query.search, 
+            request.query.search,
+            request.query.category,
+            request.query.location, 
             request.query.sort, 
             request.query.sortBy)
 
