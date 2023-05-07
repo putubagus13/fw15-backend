@@ -179,6 +179,13 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if (error.message === "category not found") {
+        return response.status(404).json({
+            success: false,
+            message: "category not found"
+        })
+    }
+
     if (error.message === "wishList_not_found") {
         return response.status(404).json({
             success: false,
