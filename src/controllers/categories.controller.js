@@ -7,7 +7,6 @@ exports.getAllCategories = async (request, response) => {
             request.query.page,
             request.query.limit,
             request.query.search,
-            request.query.location,
             request.query.sort,
             request.query.sortBy
         )
