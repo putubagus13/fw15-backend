@@ -125,6 +125,8 @@ const validator = (request, response, next) => {
         if (!errors.isEmpty()) {
             fileRemover(request.file)
             return response.json({
+                success: true,
+                message: "Validation work",
                 results: errors
             })
         }
