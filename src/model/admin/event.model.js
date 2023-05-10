@@ -123,7 +123,7 @@ exports.findOne = async function(id){
     "e"."picture",
     "e"."title",
     "e"."desciption",
-    "e"."date
+    "e"."date",
     "c"."name" as "location",
     "ct"."name" as "category",
     "e"."createdAt",
