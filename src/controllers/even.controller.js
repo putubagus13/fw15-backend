@@ -37,7 +37,8 @@ exports.addEvent = async (request, response)=>{
             createdBy: id
         }
         if(request.file){
-            data.picture = request.file.filename
+            // data.picture = request.file.filename
+            data.picture = request.file.path
         }
         const event = await eventModel.addEvent(data)
         if(!event){
@@ -78,7 +79,8 @@ exports.updateEvent = async (request, response) => {
             if(events.picture){
                 fileRemover({filename: events.picture})
             }
-            data.picture =  request.file.filename
+            // data.picture =  request.file.filename
+            data.picture = request.file.path
         }
         const eventData = await eventModel.updateData(request.params.id, request.user.id, data)
         if(!eventData){
