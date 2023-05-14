@@ -8,7 +8,7 @@ eventRouter.post("/",authMiddleweres, uploadMiddleware("picture"),validation("cr
 eventRouter.patch("/:id",authMiddleweres, uploadMiddleware("picture"), validation("updateEvent"), eventController.updateEvent)
 eventRouter.get("/manage", authMiddleweres, eventController.getEventManage)
 eventRouter.get("/manage/detail/:id",authMiddleweres, eventController.getEventDetail)
-eventRouter.get("/",validation("getAllEvent"), eventController.getAllEvent)
+eventRouter.get("/", eventController.getAllEvent)
 eventRouter.get("/detail/:id", eventController.getEvent)
 
 
