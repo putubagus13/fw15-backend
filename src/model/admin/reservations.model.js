@@ -75,7 +75,7 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
-exports.findOneByIdReservationId = async function(id){
+exports.findOneByIdReservationId = async function(id, userId){
     const query =`
     SELECT
     "r"."id",
@@ -95,9 +95,9 @@ exports.findOneByIdReservationId = async function(id){
     JOIN "paymentMethod" "pm" ON "pm"."id" = "r"."paymentMethodId"
     JOIN "users" "u" ON "u"."id" = "r"."userId"
     JOIN "cities" "c" ON "c"."id" = "e"."cityId"
-    WHERE "r"."id"=$1`
+    WHERE "r"."id"=$1 AND "r"."userId"`
 
-    const values = [id]
+    const values = [id, userId]
     const {rows} = await db.query(query, values)
     return rows[0]
 }
