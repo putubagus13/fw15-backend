@@ -40,29 +40,24 @@ exports.register = async (request, response)=>{
             ...request.body,
             password: hash
         }
-        if(data.acceptTermsAndCondition == 1){
-            const UsernameExist = await userModel.findByUserName(username)
-            //console.log(UsernameExist.username)
-            console.log(data.username)
-            if(!UsernameExist){
-                const user = await userModel.insert(data)
-                const profileData = {
-                    fullName, 
-                    userId: user.id
-                }
-                await profileModel.insert(profileData)
-                const token = jwt.sign({id: user.id}, APP_SECRET)
-                return response.json({
-                    success: true,
-                    message: "Register Success!",
-                    results: (token)
-                })
+        const UsernameExist = await userModel.findByUserName(username)
+        console.log(data.username)
+        if(!UsernameExist){
+            const user = await userModel.insert(data)
+            const profileData = {
+                fullName, 
+                userId: user.id
             }
-            if(UsernameExist.username == data.username){
-                throw Error("username_alredy_exist")
-            }
-        }else{
-            throw Error("make sure you agree to the terms")
+            await profileModel.insert(profileData)
+            const token = jwt.sign({id: user.id}, APP_SECRET)
+            return response.json({
+                success: true,
+                message: "Register Success!",
+                results: (token)
+            })
+        }
+        if(UsernameExist.username == data.username){
+            throw Error("username_alredy_exist")
         }
 
     } catch (error) {
