@@ -3,11 +3,31 @@ const errorHandler = require("../helpers/errorHandler")
 //const reservationStatusModel = require("../model/admin/reservationStatus.model")
 const eventModel = require("../model/admin/event.model")
 //const paymentMethodModel = require("../model/admin/paymentMethod.model")
+const reservationSectionModel = require("../model/admin/reservationSections.model")
 const reservationTicketModel = require("../model/admin/reservationTickets.model")
 
 exports.getAllReservation = async (request,response)=>{
     try {
         const data = await reservationModel.findAll(
+            request.query.page, 
+            request.query.limit, 
+            request.query.search, 
+            request.query.sort, 
+            request.query.sortBy)
+
+        return response.json({
+            success: true,
+            massage: "List of all reservation",
+            results: data
+        })
+    } catch (error) {
+        return errorHandler(response, error)
+    }
+}
+
+exports.getAllSection = async (request,response)=>{
+    try {
+        const data = await reservationSectionModel.findAll(
             request.query.page, 
             request.query.limit, 
             request.query.search, 
