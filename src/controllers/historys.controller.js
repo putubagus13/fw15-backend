@@ -3,8 +3,8 @@ const errorHandler = require("../helpers/errorHandler")
 
 exports.getReservationDetail = async (request, response) => {
     try {
-        console.log(request.params.id)
-        const reservation = await reservationModel.findOneByIdReservationId(request.params.id)
+        const {id}= request.user
+        const reservation = await reservationModel.findOneByIdReservationId(request.params.id, id)
         console.log(reservation)
         if(!reservation){
             throw Error("reservation_not_found")
