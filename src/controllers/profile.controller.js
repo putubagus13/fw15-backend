@@ -14,7 +14,9 @@ exports.updateProfile = async (request, response) => {
             if(user.picture){
                 fileRemover({filename: user.picture})
             }
-            data.picture =  request.file.filename
+            console.log(request.file)
+            // data.picture =  request.file.filename
+            data.picture = request.file.path
             console.log(data.picture)
         }
         const profile = await profileModel.updateByUserId(id, data)
