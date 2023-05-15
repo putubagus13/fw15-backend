@@ -8,7 +8,7 @@ const app = express()
 app.use(express.urlencoded({extended: false}))
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://beautiful-madeleine-29b377.netlify.app",
     optionalSuccessStatus: 200
 }))
 
