@@ -33,7 +33,6 @@ const quantity = body("quantity").optional().toInt().isInt().withMessage("Input 
 const status = body("status").optional().toInt().isInt().withMessage("Must input number section id")
 const paymentMethodId = body("paymentMethodId").optional().toInt().isInt().withMessage("Input quantity is invalid")
 const code = body("code").optional().isLength({min:6, max:6}).withMessage("Code Invalid")
-const oldPassword = body("oldPassword").optional().isStrongPassword().withMessage("Password not enough strong")
 const newPassword = body("newPassword").optional().isStrongPassword().withMessage("Password not enough strong")
 
 
@@ -113,7 +112,7 @@ const rules = {
     updateReservation: [Idparams, eventId, userId, status, paymentMethodId],
     deleteReservation: [Idparams],
 
-    changePassword: [oldPassword, newPassword,]
+    changePassword: [newPassword]
 
 
 
