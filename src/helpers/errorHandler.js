@@ -68,6 +68,13 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if(error?.message?.includes("old password invalid")){
+        return response.status(401).json({
+            success: false,
+            message: "Old password invalid"
+        })
+    }
+
     if(error?.message?.includes("password_unmatch")){
         return response.status(401).json({
             success: false,
