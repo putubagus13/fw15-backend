@@ -58,3 +58,12 @@ exports.findOne = async function(id){
     const {rows} = await db.query(query, values)
     return rows[0]
 }
+
+exports.findOneByReservationId = async function(resevationId){
+    const query =`
+    SELECT * FROM "${table}" WHERE "resevationId"=$1`
+
+    const values = [resevationId]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}

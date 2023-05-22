@@ -68,7 +68,19 @@ exports.destroy = async function(id){
 
 exports.findOne = async function(id){
     const query =`
-    SELECT * FROM "${teble}" WHERE id=$1`
+    SELECT
+    "r"."id",
+    "e"."title",
+    "rs"."name" as "section",
+    "rs"."price",
+    "rt"."quantity",
+    "r"."createdAt",
+    "r"."updatedAt"
+    FROM "${teble}" "r"
+    JOIN "events" "e" ON "e"."id" = "r"."eventId"
+    JOIN "reservationTickets" "rt" ON "rt"."resevationId" = "r"."id"
+    JOIN "reservationSections" "rs" ON "rs".id = "rt"."sectionId"
+    WHERE "r"."id"=$1`
 
     const values = [id]
     const {rows} = await db.query(query, values)
@@ -79,26 +91,60 @@ exports.findOneByIdReservationId = async function(id, userId){
     const query =`
     SELECT
     "r"."id",
-    "u"."username",
-    "u"."email",
     "e"."picture",
     "e"."title",
     "e"."date",
-    "c"."name" as "location",
-    "e"."desciption",
-    "r"."status",
+    "rs"."name" as "status",
+    "s"."name" as "section",
+    "s"."price",
+    "rt"."quantity",
     "pm"."name" as "PaymentMetode",
     "r"."createdAt",
     "r"."updatedAt"
     FROM "${teble}" "r"
     JOIN "events" "e" ON "e"."id" = "r"."eventId"
     JOIN "paymentMethod" "pm" ON "pm"."id" = "r"."paymentMethodId"
-    JOIN "users" "u" ON "u"."id" = "r"."userId"
-    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
-    WHERE "r"."id"=$1 AND "r"."userId"`
+    JOIN "reservationStatus" "rs" ON "rs"."id" = "r"."status"
+    JOIN "reservationTickets" "rt" ON "rt"."resevationId" = "r"."id"
+    JOIN "reservationSections" "s" ON "s"."id" = "rt"."sectionId"
+    WHERE "r"."id"=$1 AND "r"."userId"=$2`
 
     const values = [id, userId]
     const {rows} = await db.query(query, values)
     return rows[0]
 }
 
+exports.findAllHistory = async function(page, limit, sort, sortBy){
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 5
+    sort = sort || "id"
+    sortBy = sortBy || "ASC"
+    const offset = (page -1)* limit
+    const query= `
+    SELECT
+    "r"."id",
+    "e"."picture",
+    "e"."title",
+    "e"."date",
+    "c"."name" as "location",
+    "rs"."name" as "status",
+    "s"."name" as "section",
+    "s"."price",
+    "rt"."quantity",
+    "pm"."name" as "PaymentMetode",
+    "r"."createdAt",
+    "r"."updatedAt"
+    FROM "${teble}" "r"
+    JOIN "events" "e" ON "e"."id" = "r"."eventId"
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    JOIN "paymentMethod" "pm" ON "pm"."id" = "r"."paymentMethodId"
+    JOIN "reservationStatus" "rs" ON "rs"."id" = "r"."status"
+    JOIN "reservationTickets" "rt" ON "rt"."resevationId" = "r"."id"
+    JOIN "reservationSections" "s" ON "s"."id" = "rt"."sectionId" 
+    ORDER BY ${sort} ${sortBy} 
+    LIMIT $1 OFFSET $2`
+
+    const values = [ limit, offset]
+    const {rows} = await db.query(query,values)
+    return rows
+}
