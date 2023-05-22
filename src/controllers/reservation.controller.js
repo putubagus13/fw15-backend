@@ -5,6 +5,7 @@ const eventModel = require("../model/admin/event.model")
 //const paymentMethodModel = require("../model/admin/paymentMethod.model")
 const reservationSectionModel = require("../model/admin/reservationSections.model")
 const reservationTicketModel = require("../model/admin/reservationTickets.model")
+const rsvSectionModel = require("../model/admin/reservationSections.model")
 
 exports.getAllReservation = async (request,response)=>{
     try {
@@ -50,36 +51,41 @@ exports.createReservation = async (request, response)=>{
         if(!events){
             throw Error("event_not_found")
         } 
-        // const status = await reservationStatusModel.findOne(request.body.status)
-        // if(!status){
-        //     throw Error("status_not_found")
-        // } 
-        // const paymentId = await paymentMethodModel.findOne(request.body.paymentMethodId)
-        // if(!paymentId){
-        //     throw Error("paymentMethod_not_found")
-        // } 
         const data = {
             ...request.body,
-            userId: id
+            userId: id,
+            status: 5
         }
         const reservation = await reservationModel.insert(data)
         if(!reservation){
             return Error("update_failed")
         }
+        const section = await rsvSectionModel.findOne(request.body.sectionId)
 
         const reservationData = {
             ...request.body,
-            resevationId: reservation.id
+            resevationId: reservation.id,
+            sectionId: section.id
+
         }
 
         await reservationTicketModel.insert(reservationData)
         return response.json({
             success: true,
-            message: "Update reservation Success!",
-            results: reservation
+            message: "Create reservation Success!",
+            results: {
+                id: reservation.id,
+                events: events,
+                quantity: request.body.quantity,
+                pricePerTicket: section.price,
+                totalPrice: parseInt(request.body.quantity)* section.price
+
+            }
         })
     } catch (error) {
         return errorHandler(response,error)
     }
 }
+
+
 

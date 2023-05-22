@@ -90,7 +90,7 @@ exports.updateEvent = async (request, response) => {
         return response.json({
             success: true,
             message: "Event success edited",
-            result: events
+            result: eventData
         }) 
     } catch (error) {
         return errorHandler(response, error)

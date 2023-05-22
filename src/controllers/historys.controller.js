@@ -17,3 +17,23 @@ exports.getReservationDetail = async (request, response) => {
         return errorHandler(response, error)
     }
 }
+
+exports.getAll = async (request, response) =>{
+    try {
+        const data = await reservationModel.findAllHistory(
+            request.query.page, 
+            request.query.limit, 
+            request.query.search, 
+            request.query.sort, 
+            request.query.sortBy)
+
+        return response.json({
+            success: true,
+            massage: "List of all reservation Booking",
+            results: data
+        })
+    } catch (error) {
+        return errorHandler(response, error)
+    }
+}
+
