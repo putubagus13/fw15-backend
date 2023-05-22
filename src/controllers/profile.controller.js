@@ -1,4 +1,4 @@
-const fileRemover = require("../helpers/fileRemover.helpers")
+// const fileRemover = require("../helpers/fileRemover.helpers")
 const profileModel = require("../model/admin/profile.model")
 const errorHandler = require("../helpers/errorHandler")
 const userModel = require("../model/admin/users.model")
@@ -6,33 +6,34 @@ const userModel = require("../model/admin/users.model")
 exports.updateProfile = async (request, response) => {
     try {
         const {id} = request.user
-        const user = await profileModel.findOneByUserId(id)
+        // const user = 
+        await profileModel.findOneByUserId(id)
         const data = {
             ...request.body
         }
-        if(request.file){
-            if(user.picture){
-                fileRemover({filename: user.picture})
-            }
-            console.log(request.file)
-            // data.picture =  request.file.filename
-            data.picture = request.file.path
-            console.log(data.picture)
-        }
+        // if(request.file){
+        //     if(user.picture){
+        //         fileRemover({filename: user.picture})
+        //     }
+        console.log(request.file)
+        // data.picture =  request.file.filename
+        data.picture = request.file.path
+        console.log(data.picture)
         const profile = await profileModel.updateByUserId(id, data)
         if(!profile){
             throw Error ("profile_update_failed")
         }
-        let updateEmail
+        let updateUser
         if(data.email){
-            updateEmail = await userModel.update(id, data)
+            updateUser = await userModel.update(id, data)
         }else{
-            updateEmail = await userModel.findOne(id)
+            updateUser = await userModel.findOne(id)
         }
 
         const result = {
             ...profile,
-            email: updateEmail?.email
+            email: updateUser?.email,
+            username: updateUser?.username
         }
 
         return response.json({
