@@ -4,6 +4,6 @@ const profileController = require("../controllers/profile.controller")
 const validation = require("../middlewares/validator.middlewere")
 
 profileRouter.get("/", profileController.getProfile)
-profileRouter.post("/", uploadMiddleware("picture"), validation("createProfile"), profileController.updateProfile)
+profileRouter.patch("/", uploadMiddleware("picture"), validation("createProfile"), profileController.updateProfile)
 
 module.exports = profileRouter
