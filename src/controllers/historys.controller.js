@@ -20,7 +20,8 @@ exports.getReservationDetail = async (request, response) => {
 
 exports.getAll = async (request, response) =>{
     try {
-        const {id} = request.user.id
+        const {id} = request.user
+        console.log(id)
         const data = await reservationModel.findAllHistory(id)
 
         return response.json({
