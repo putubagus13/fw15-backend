@@ -143,7 +143,7 @@ exports.findAllHistory = async function(page, limit, sort, sortBy, userId){
     JOIN "reservationSections" "s" ON "s"."id" = "rt"."sectionId" 
     WHERE "r"."userId"=$1
     ORDER BY ${sort} ${sortBy} 
-    LIMIT $1 OFFSET $2`
+    LIMIT $2 OFFSET $3`
 
     const values = [userId, limit, offset]
     const {rows} = await db.query(query,values)
