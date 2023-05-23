@@ -114,7 +114,7 @@ exports.findOneByIdReservationId = async function(id, userId){
     return rows[0]
 }
 
-exports.findAllHistory = async function(page, limit, sort, sortBy){
+exports.findAllHistory = async function(page, limit, sort, sortBy, userId){
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
     sort = sort || "id"
@@ -141,10 +141,11 @@ exports.findAllHistory = async function(page, limit, sort, sortBy){
     JOIN "reservationStatus" "rs" ON "rs"."id" = "r"."status"
     JOIN "reservationTickets" "rt" ON "rt"."resevationId" = "r"."id"
     JOIN "reservationSections" "s" ON "s"."id" = "rt"."sectionId" 
+    WHERE "r"."userId"=$1
     ORDER BY ${sort} ${sortBy} 
     LIMIT $1 OFFSET $2`
 
-    const values = [ limit, offset]
+    const values = [userId, limit, offset]
     const {rows} = await db.query(query,values)
     return rows
 }
