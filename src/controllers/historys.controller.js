@@ -20,12 +20,12 @@ exports.getReservationDetail = async (request, response) => {
 
 exports.getAll = async (request, response) =>{
     try {
+        const {id} = request.user.id
         const data = await reservationModel.findAllHistory(
             request.query.page, 
             request.query.limit, 
-            request.query.search, 
             request.query.sort, 
-            request.query.sortBy)
+            request.query.sortBy, id)
 
         return response.json({
             success: true,
