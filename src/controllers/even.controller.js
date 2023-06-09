@@ -1,6 +1,6 @@
 const eventModel = require("../model/admin/event.model")
 const errorHandler = require("../helpers/errorHandler")
-const fileRemover = require("../helpers/fileRemover.helpers")
+// const fileRemover = require("../helpers/fileRemover.helpers")
 const citiesModel = require("../model/admin/cities.model")
 const eventCategoriesModel = require("../model/admin/eventCategories.model")
 
@@ -36,10 +36,10 @@ exports.addEvent = async (request, response)=>{
             ...request.body,
             createdBy: id
         }
-        if(request.file){
-            // data.picture = request.file.filename
-            data.picture = request.file.path
-        }
+        // if(request.file){
+        // data.picture = request.file.filename
+        data.picture = request.file.path
+        // }
         const event = await eventModel.addEvent(data)
         if(!event){
             return Error("update_failed")
@@ -75,13 +75,13 @@ exports.updateEvent = async (request, response) => {
             ...request.body,
             createdBy: request.user.id
         }
-        if(request.file){
-            if(events.picture){
-                fileRemover({filename: events.picture})
-            }
-            // data.picture =  request.file.filename
-            data.picture = request.file.path
-        }
+        // if(request.file){
+        //     if(events.picture){
+        //         fileRemover({filename: events.picture})
+        //     }
+        // data.picture =  request.file.filename
+        data.picture = request.file.path
+        // }
         const eventData = await eventModel.updateData(request.params.id, request.user.id, data)
         if(!eventData){
             throw Error ("event_update_failed")
