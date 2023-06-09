@@ -15,10 +15,8 @@ exports.updateProfile = async (request, response) => {
         //     if(user.picture){
         //         fileRemover({filename: user.picture})
         //     }
-        console.log(request.file)
         // data.picture =  request.file.filename
         data.picture = request.file.path
-        console.log(data.picture)
         const profile = await profileModel.updateByUserId(id, data)
         if(!profile){
             throw Error ("profile_update_failed")
