@@ -31,7 +31,8 @@ exports.createCities = async (request, response)=>{
         }
 
         if(request.file){
-            data.picture = request.file.filename
+            // data.picture = request.file.filename
+            data.picture = request.file.path
         }
         const cities = await citiesModel.insert(data)
         if(!cities){
@@ -57,7 +58,8 @@ exports.updateCities = async (request, response)=>{
             data.password = await argon.hash(request.body.password)
         }
         if(request.file){
-            data.picture = request.file.filename
+            // data.picture = request.file.filename
+            data.picture = request.file.path
         }
         const cities = await citiesModel.update(request.params.id, data)
         if(!cities){
