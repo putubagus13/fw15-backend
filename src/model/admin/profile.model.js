@@ -18,7 +18,7 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "${table}" ("picture", "fullName", "phoneNumbe", "gender", "profession", "nasionality", "birthDate", "userId" )
+    INSERT INTO "${table}" ("picture", "fullName", "phoneNumber", "gender", "profession", "nasionality", "birthDate", "userId" )
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *
     `
     const values = [data.picture, data.fullName, data.phoneNumbe, data.gender, data.profession, data.nasionality, data.birthDate, data.userId]
@@ -32,7 +32,7 @@ exports.update = async function(id, data){
     SET 
     "picture"= COALESCE(NULLIF($2,''), "picture"),
     "fullName"= COALESCE(NULLIF($3,''), "fullName"),
-    "phoneNumbe"= COALESCE(NULLIF($4,''), "phoneNumbe"),
+    "phoneNumber"= COALESCE(NULLIF($4,''), "phoneNumber"),
     "gender"= COALESCE(NULLIF($5::BOOLEAN, NULL), "gender"),
     "profession"= COALESCE(NULLIF($6,''), "profession"),
     "nasionality"= COALESCE(NULLIF($7,''), "nasionality"),
@@ -41,7 +41,7 @@ exports.update = async function(id, data){
     WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.picture, data.fullName, data.phoneNumbe, data.gender, data.profession, data.nasionality, data.birthDate, data.userId]
+    const values = [id, data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nasionality, data.birthDate, data.userId]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -52,7 +52,7 @@ exports.updateByUserId = async function(userId, data){
     SET 
     "picture"= COALESCE(NULLIF($2,''), "picture"),
     "fullName"= COALESCE(NULLIF($3,''), "fullName"),
-    "phoneNumbe"= COALESCE(NULLIF($4,''), "phoneNumbe"),
+    "phoneNumber"= COALESCE(NULLIF($4,''), "phoneNumber"),
     "gender"= COALESCE(NULLIF($5::BOOLEAN, NULL), "gender"),
     "profession"= COALESCE(NULLIF($6,''), "profession"),
     "nasionality"= COALESCE(NULLIF($7,''), "nasionality"),
@@ -60,7 +60,7 @@ exports.updateByUserId = async function(userId, data){
     WHERE "userId"=$1
     RETURNING *
     `
-    const values = [userId, data.picture, data.fullName, data.phoneNumbe, data.gender, data.profession, data.nasionality, data.birthDate]
+    const values = [userId, data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nasionality, data.birthDate]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -91,7 +91,7 @@ exports.findOneByUserId = async function(userId){
     "p"."fullName",
     "u"."username",
     "u"."email",
-    "p"."phoneNumbe",
+    "p"."phoneNumber",
     "p"."gender",
     "p"."profession",
     "p"."nasionality",
