@@ -49,11 +49,11 @@ exports.update = async function(id, data){
     return rows[0]
 } 
 
-exports.destroy = async function(id){
+exports.destroy = async function(email){
     const query = `
-    DELETE FROM "${table}" WHERE "id"=$1 RETURNING *
+    DELETE FROM "${table}" WHERE "email"=$1 RETURNING *
 `
-    const values = [id]
+    const values = [email]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
