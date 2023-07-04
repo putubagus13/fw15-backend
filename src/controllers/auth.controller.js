@@ -72,6 +72,10 @@ exports.forgotRequest = async(request, response)=>{
         if(!user){
             throw Error("not_user")
         }
+        const forgotReq = await forgotRequestModel.findOneByEmail(email)
+        if(forgotReq){
+            throw Error("request already exists")
+        }
         const randomNumber = Math.random()
         const rounded = Math.round(randomNumber * 1000)
         const padded = String(rounded).padEnd(6, "0")
@@ -96,7 +100,7 @@ exports.resetPassword = async (request, response) =>{
     try {
         const {code, email, password} = request.body
         const find = await forgotRequestModel.findOneByEmail(email)
-        console.log(find.code)
+        console.log(find)
         if(!find){
             throw Error("Reset_failed")
         }
@@ -112,10 +116,12 @@ exports.resetPassword = async (request, response) =>{
         if(!user){
             throw Error("Reset_failed")
         }
+        await forgotRequestModel.destroy(email)
         return response.json({
             success: true,
             message: "Reset password success"
         })
+
     } catch (error) {
         return errorHendle(response,error)
     }
