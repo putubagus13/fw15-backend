@@ -31,7 +31,8 @@ exports.createPartner = async (request, response)=>{
         }
 
         if(request.file){
-            data.picture = request.file.filename
+            // data.picture = request.file.filename
+            data.picture = request.file.path
         }
         const partner = await partnerModel.insert(data)
         if(!partner){
@@ -56,7 +57,8 @@ exports.updatePartner = async (request, response)=>{
             data.password = await argon.hash(request.body.password)
         }
         if(request.file){
-            data.picture = request.file.filename
+            // data.picture = request.file.filename
+            data.picture = request.file.path
         }
         const partner = await partnerModel.update(request.params.id, data)
         if(!partner){

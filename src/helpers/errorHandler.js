@@ -54,6 +54,13 @@ const errrorHendle = (response, error)=>{
         })
     }
 
+    if(error?.message?.includes("request already exists")){
+        return response.status(400).json({
+            success: false,
+            message: "Request Already Exists"
+        })
+    }
+
     if(error?.message?.includes("jwt malformed")){
         return response.status(401).json({
             success: false,
@@ -130,10 +137,10 @@ const errrorHendle = (response, error)=>{
         })
     }
 
-    if (error.message === "reset_failed") {
+    if (error.message === "Reset_failed") {
         return response.status(404).json({
             success: false,
-            message: "Reset failed! Please check your code confirm and email again"
+            message: "Request Not Found"
         })
     }
 

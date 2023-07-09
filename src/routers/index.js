@@ -20,6 +20,7 @@ router.use("/reservation", authMiddleweres, require("../routers/reservation.rout
 router.use("/changePassword", authMiddleweres, require("../routers/changePassword.router"))
 router.use("/wishList", authMiddleweres, require("../routers/wishList.router"))
 router.use("/historys", authMiddleweres, require("../routers/historys.router"))
+router.use("/device-token", authMiddleweres, require("./deviceToken.router"))
 
 
 router.use("*", (request,response)=>{

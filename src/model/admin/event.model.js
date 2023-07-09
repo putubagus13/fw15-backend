@@ -26,9 +26,9 @@ exports.findAll = async function(page, limit, search, category, location, sort, 
     JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     JOIN "eventCategories" "ec" ON "ec"."eventId" = "e"."id"
     JOIN "categories" "ct" ON "ct"."id" = "ec"."categoryId"
-    WHERE "e"."title" LIKE $1
-    AND "ct"."name" LIKE $2
-    AND "c"."name" LIKE $3
+    WHERE "e"."title" ILIKE $1
+    AND "ct"."name" ILIKE $2
+    AND "c"."name" ILIKE $3
     ORDER BY ${sort} ${sortBy} 
     LIMIT $4 OFFSET $5`
 
@@ -43,7 +43,7 @@ exports.insert = async function(data){
     `
     const values = [data.picture, data.title, data.date, data.cityId, data.desciption]
     const {rows} = await db.query(query, values)
-    return rows[0]
+    return rows[0] 
 } 
 
 exports.addEvent = async function(data){
@@ -139,7 +139,7 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
-exports.findOneManage = async function(createdBy){
+exports.findManage = async function(createdBy){
     const query =`
     SELECT  
     "e"."id",
