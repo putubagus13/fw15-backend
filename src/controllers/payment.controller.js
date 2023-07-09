@@ -12,7 +12,7 @@ exports.createPayment = async (request, response)=>{
         }
         const data = {
             ...request.body,
-            status: 4
+            status: 1
         }
     
         const payment = await reservationModel.update(request.body.reservationId, data)

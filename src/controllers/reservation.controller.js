@@ -54,7 +54,7 @@ exports.createReservation = async (request, response)=>{
         const data = {
             ...request.body,
             userId: id,
-            status: 5
+            status: 2
         }
         const reservation = await reservationModel.insert(data)
         if(!reservation){

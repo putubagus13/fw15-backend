@@ -21,16 +21,30 @@ exports.getReservationDetail = async (request, response) => {
 exports.getAll = async (request, response) =>{
     try {
         const {id} = request.user
-        console.log(id)
-        const data = await reservationModel.findAllHistory(id)
+        const dataHistory = await reservationModel.findAllHistory(id, request.query)
 
         return response.json({
             success: true,
             massage: "List of all reservation Booking",
-            results: data
+            results: dataHistory
         })
     } catch (error) {
         return errorHandler(response, error)
     }
 }
 
+exports.deleteHistory = async (request,response)=>{
+    try {
+        const data = await reservationModel.destroy(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Delete History successfully",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+  
+}

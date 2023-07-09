@@ -80,21 +80,17 @@ exports.updateEvent = async (request, response) => {
         if(!events){
             throw Error("event_not_found")
         } 
-        const cityId = await citiesModel.findOne(request.body.cityId)
-        if(!cityId){
-            throw Error("city_not_found")
-        }
         const data = {
             ...request.body,
             createdBy: request.user.id
         }
-        // if(request.file){
-        //     if(events.picture){
-        //         fileRemover({filename: events.picture})
-        //     }
+        if(request.file){
+            data.picture = request.file.path
+            // if(events.picture){
+            //     fileRemover({filename: events.picture})
+            // }
         // data.picture =  request.file.filename
-        data.picture = request.file.path
-        // }
+        }
         const eventData = await eventModel.updateData(request.params.id, request.user.id, data)
         if(!eventData){
             throw Error ("event_update_failed")
@@ -128,7 +124,7 @@ exports.getEvent = async (request, response) => {
 
 exports.getEventManage = async (request, response) => {
     try {
-        const event = await eventModel.findOneManage(request.user.id)
+        const event = await eventModel.findManage(request.user.id)
         if(!event){
             throw Error("event_not_found")
         }
@@ -156,4 +152,20 @@ exports.getEventDetail = async (request, response) => {
     } catch(error) {
         return errorHandler(response, error)
     }
+}
+
+exports.deleteEvent = async (request,response)=>{
+    try {
+        const data = await eventModel.destroy(request.params.id)
+        if(data){
+            return response.json({
+                success: true,
+                massage: "Delete Event successfully",
+                results: data
+            })
+        }
+    } catch (error) {
+        errorHandler(response, error)
+    }
+
 }

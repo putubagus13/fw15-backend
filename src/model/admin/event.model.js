@@ -43,7 +43,7 @@ exports.insert = async function(data){
     `
     const values = [data.picture, data.title, data.date, data.cityId, data.desciption]
     const {rows} = await db.query(query, values)
-    return rows[0]
+    return rows[0] 
 } 
 
 exports.addEvent = async function(data){
@@ -139,7 +139,7 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
-exports.findOneManage = async function(createdBy){
+exports.findManage = async function(createdBy){
     const query =`
     SELECT  
     "e"."id",
