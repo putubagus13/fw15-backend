@@ -4,7 +4,7 @@ const tabel = "events"
 
 exports.findAll = async function(page, limit, search, category, location, sort, sortBy){
     page = parseInt(page) || 1
-    limit = parseInt(limit) || 5
+    limit = parseInt(limit) || 20
     search = search || ""
     category = category || ""
     location = location || ""
