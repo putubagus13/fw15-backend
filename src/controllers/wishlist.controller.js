@@ -63,7 +63,7 @@ exports.getDetailWishlist = async (request, response)=>{
 
 exports.deleteWishList = async (request,response)=>{
     try {
-        const data = await wishListModel.destroy(request.params.id)
+        const data = await wishListModel.destroy(request.body)
         if(!data){
             throw Error("wishList_not_found")
         }

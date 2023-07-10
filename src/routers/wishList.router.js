@@ -3,7 +3,8 @@ const wishListController = require("../controllers/wishlist.controller")
 const validation = require("../middlewares/validator.middlewere")
 
 wishListRouter.post("/", validation("createWishList"), wishListController.createWishList)
+wishListRouter.delete("/", wishListController.deleteWishList)
+wishListRouter.get("/", wishListController.getAll)
 wishListRouter.get("/:id", wishListController.getDetailWishlist)
-wishListRouter.delete("/:id", wishListController.deleteWishList)
 
 module.exports = wishListRouter
