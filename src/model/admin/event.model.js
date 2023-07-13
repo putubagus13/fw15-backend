@@ -167,12 +167,14 @@ exports.findManage = async function(createdBy){
     "e"."date",
     "c"."name" as "location",
     "ct"."name" as "category",
+    "w"."eventId",
     "e"."createdAt",
     "e"."updatedAt"
     FROM "${tabel}" "e"
     JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     JOIN "eventCategories" "ec" ON "ec"."eventId" = "e"."id"
     JOIN "categories" "ct" ON "ct"."id" = "ec"."categoryId" 
+    LEFT JOIN "wishList" "w" ON "w"."eventId" = "e"."id"
     WHERE "e"."createdBy"=$1`
 
     const values = [createdBy]

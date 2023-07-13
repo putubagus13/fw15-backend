@@ -40,11 +40,11 @@ exports.update = async function(id, data){
     return rows[0]
 } 
 
-exports.destroy = async function(id){
+exports.destroy = async function(eventId){
     const query = `
-    DELETE FROM "${table}" WHERE "id"=$1 RETURNING *
+    DELETE FROM "${table}" WHERE "eventId"=$1 RETURNING *
 `
-    const values = [id]
+    const values = [eventId]
     const {rows} = await db.query(query, values)
     return rows[0]
 } 
@@ -54,6 +54,15 @@ exports.findOne = async function(id){
     SELECT * FROM "${table}" WHERE id=$1`
 
     const values = [id]
+    const {rows} = await db.query(query, values)
+    return rows[0]
+}
+
+exports.findOneWishlist = async function(eventId){
+    const query =`
+  SELECT * FROM "${table}" WHERE "eventId"=$1`
+
+    const values = [eventId]
     const {rows} = await db.query(query, values)
     return rows[0]
 }
