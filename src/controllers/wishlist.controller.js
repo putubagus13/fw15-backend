@@ -3,7 +3,9 @@ const errorHendler = require("../helpers/errorHandler")
 
 exports.getAll = async (request, response)=>{
     try {
-        const data = await wishListModel.findAll(
+        const {id: userId} = request.user
+        const { rows: results, pageInfo }  = await wishListModel.findAll(
+            userId,
             request.query.page,
             request.query.limit,
             request.query.search,
@@ -13,7 +15,8 @@ exports.getAll = async (request, response)=>{
         return response.json({
             success: true,
             message: "List of all wishlist",
-            results: data
+            pageInfo,
+            results
         })
 
     } catch (error) {

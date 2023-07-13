@@ -2,18 +2,48 @@ const db = require("../../helpers/db.helper")
 
 const table = "wishList"
 
-exports.findAll = async function(page, limit, search, sort, sortBy){
+exports.findAll = async function(userId, page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
     sort = sort || "id"
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
-    const query= `
-    SELECT * FROM "${table}" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2`
 
-    const values = [limit, offset]
-    const {rows} = await db.query(query,values)
-    return rows
+    const countQuery = `
+    SELECT COUNT(*)::INTEGER
+    FROM "${table}"
+    WHERE "userId"= $1`
+
+    const countvalues = [userId]
+    const { rows: countRows } = await db.query(countQuery, countvalues)
+
+    const query= `
+    SELECT  
+    "w"."id",
+    "e"."id" as "idEvent",
+    "e"."title",
+    "e"."date",
+    "c"."name" as "location",
+    "w"."eventId",
+    "w"."createdAt",
+    "w"."updatedAt"
+    FROM "${table}" "w"
+    JOIN "events" "e" ON "e"."id" = "w"."eventId" 
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    WHERE "w"."userId"=$1
+    ORDER BY ${sort} ${sortBy} LIMIT $2 OFFSET $3`
+
+    const values = [userId ,limit, offset]
+    const { rows } = await db.query(query, values)
+    return {
+        rows,
+        pageInfo: {
+            totalData: countRows[0].count,
+            page: page,
+            limit: limit,
+            totalPage: Math.ceil(countRows[0].count / limit),
+        },
+    }
 }
 
 exports.insert = async function(data){
