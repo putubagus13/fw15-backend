@@ -9,8 +9,17 @@ exports.findAll = async function(page, limit, search, category, location, sort, 
     category = category || ""
     location = location || ""
     sort = sort || "id"
-    sortBy = sortBy || "ASC"
+    sortBy = sortBy || "DESC"
     const offset = (page -1)* limit
+
+    const countQuery = `
+    SELECT COUNT(*)::INTEGER
+    FROM ${tabel}
+    WHERE "title" LIKE $1`
+
+    const countvalues = [`%${search}%`]
+    const { rows: countRows } = await db.query(countQuery, countvalues)
+
     const query= `
     SELECT
     "e"."id",
@@ -33,9 +42,18 @@ exports.findAll = async function(page, limit, search, category, location, sort, 
     LIMIT $4 OFFSET $5`
 
     const values = [`%${search}%`, `%${category}%`, `%${location}%`, limit, offset]
-    const {rows} = await db.query(query,values)
-    return rows
+    const { rows } = await db.query(query, values)
+    return {
+        rows,
+        pageInfo: {
+            totalData: countRows[0].count,
+            page: page,
+            limit: limit,
+            totalPage: Math.ceil(countRows[0].count / limit),
+        },
+    }
 }
+
 exports.insert = async function(data){
     const query = `
     INSERT INTO "${tabel}" ("picture", "title", "date", "cityId", "desciption")
