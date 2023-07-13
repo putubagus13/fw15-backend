@@ -56,7 +56,7 @@ exports.addEvent = async (request, response)=>{
         messaging.sendEach(message)
         const event = await eventModel.addEvent(data)
         if(!event){
-            return Error("update_failed")
+            return Error("update_failed") 
         }
 
         const eventIdData = {
