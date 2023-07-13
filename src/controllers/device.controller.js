@@ -8,13 +8,14 @@ exports.saveToken = async (requset, response) => {
         const dataToken = await deviceTokenModel.findOne(token)
         if(dataToken){
             await deviceTokenModel.update(token, id)
+        }else{
+            await deviceTokenModel.insertToken(id, {token})
         }
-        const data = await deviceTokenModel.insertToken(id, {token})
         return response.json({
             success: true,
             message: "insert token success",
             results: {
-                token: data.token
+                token
             }
         })
     } catch (error) {

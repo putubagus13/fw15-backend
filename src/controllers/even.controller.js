@@ -8,7 +8,7 @@ const deviceTokenModel = require("../model/admin/deviceToken.model")
 
 exports.getAllEvent = async (request,response)=>{
     try {
-        const data = await eventModel.findAll(
+        const { rows: results, pageInfo } = await eventModel.findAll(
             request.query.page, 
             request.query.limit, 
             request.query.search,
@@ -20,7 +20,8 @@ exports.getAllEvent = async (request,response)=>{
         return response.json({
             success: true,
             massage: "List of all event",
-            results: data
+            pageInfo,
+            results
         })
     } catch (error) {
         return errorHandler(response, error)

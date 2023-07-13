@@ -27,7 +27,7 @@ exports.findAll = async function(page, limit, sort, sortBy){
 
 exports.findOne = async function(token){
     const query =`
-    SELECT * FROM "${table}" WHERE id=$1`
+    SELECT * FROM "${table}" WHERE token=$1`
 
     const values = [token]
     const {rows} = await db.query(query, values)
