@@ -5,6 +5,7 @@ const table = "wishList"
 exports.findAll = async function(userId, page, limit, search, sort, sortBy){
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
+    search = search || ""
     sort = sort || "id"
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
@@ -30,10 +31,11 @@ exports.findAll = async function(userId, page, limit, search, sort, sortBy){
     FROM "${table}" "w"
     JOIN "events" "e" ON "e"."id" = "w"."eventId" 
     JOIN "cities" "c" ON "c"."id" = "e"."cityId"
-    WHERE "w"."userId"=$1
-    ORDER BY ${sort} ${sortBy} LIMIT $2 OFFSET $3`
+    WHERE "e"."title" ILIKE $1
+    AND "w"."userId"=$2
+    ORDER BY ${sort} ${sortBy} LIMIT $3 OFFSET $4`
 
-    const values = [userId ,limit, offset]
+    const values = [`%${search}%`, userId ,limit, offset]
     const { rows } = await db.query(query, values)
     return {
         rows,
