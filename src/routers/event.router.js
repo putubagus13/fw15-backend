@@ -1,6 +1,6 @@
 const eventRouter = require("express").Router()
 const uploadMiddleware = require("../middlewares/upload.middleware")
-const eventController = require("../controllers/even.controller")
+const eventController = require("../controllers/event.controller")
 const validation = require("../middlewares/validator.middlewere")
 const authMiddleweres = require("../middlewares/auth.middlewere")
 
