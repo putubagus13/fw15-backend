@@ -124,10 +124,20 @@ exports.findAllHistory = async function(userId, page, limit, search, category, l
     sortBy = sortBy || "ASC"
     const offset = (page -1)* limit
 
+    const countQuery = `
+    SELECT COUNT(*)::INTEGER
+    FROM "${teble}"
+    WHERE "userId"= $1`
+
+    const countvalues = [userId]
+    const { rows: countRows } = await db.query(countQuery, countvalues)
+
     const query= `
     SELECT
     "r"."id",
     "e"."picture",
+    "e"."id" as "eventId",
+    "w"."eventId" as "idEvent",
     "e"."title",
     "e"."date",
     "c"."name" as "location",
@@ -145,11 +155,21 @@ exports.findAllHistory = async function(userId, page, limit, search, category, l
     JOIN "reservationStatus" "rs" ON "rs"."id" = "r"."status"
     JOIN "reservationTickets" "rt" ON "rt"."resevationId" = "r"."id"
     JOIN "reservationSections" "s" ON "s"."id" = "rt"."sectionId" 
-    WHERE "r"."userId"=$1
+    LEFT JOIN "wishList" "w" ON "w"."eventId" = "e"."id"
+    WHERE "e"."title" ILIKE $1
+    AND "r"."userId"=$2
     ORDER BY ${sort} ${sortBy} 
-    LIMIT $2 OFFSET $3`
+    LIMIT $3 OFFSET $4`
 
-    const values = [userId, limit, offset]
-    const {rows} = await db.query(query,values)
-    return rows
+    const values = [`%${search}%`, userId, limit, offset]
+    const { rows } = await db.query(query, values)
+    return {
+        rows,
+        pageInfo: {
+            totalData: countRows[0].count,
+            page: page,
+            limit: limit,
+            totalPage: Math.ceil(countRows[0].count / limit),
+        },
+    }
 }
