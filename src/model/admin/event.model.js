@@ -159,7 +159,24 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
-exports.findManage = async function(createdBy){
+exports.findManage = async function(createdBy, page, limit, search, category, location, sort, sortBy){
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 20
+    search = search || ""
+    category = category || ""
+    location = location || ""
+    sort = sort || "id"
+    sortBy = sortBy || "DESC"
+    const offset = (page -1)* limit
+
+    const countQuery = `
+    SELECT COUNT(*)::INTEGER
+    FROM ${tabel}
+    WHERE "title" ILIKE $1`
+
+    const countvalues = [`%${search}%`]
+    const { rows: countRows } = await db.query(countQuery, countvalues)
+
     const query =`
     SELECT  
     "e"."id",
@@ -177,11 +194,22 @@ exports.findManage = async function(createdBy){
     JOIN "eventCategories" "ec" ON "ec"."eventId" = "e"."id"
     JOIN "categories" "ct" ON "ct"."id" = "ec"."categoryId" 
     LEFT JOIN "wishList" "w" ON "w"."eventId" = "e"."id"
-    WHERE "e"."createdBy"=$1`
-
-    const values = [createdBy]
-    const {rows} = await db.query(query, values)
-    return rows
+    WHERE "e"."title" ILIKE $1
+    AND "e"."createdBy"=$2
+    ORDER BY ${sort} ${sortBy} 
+    LIMIT $3 OFFSET $4`
+    
+    const values = [`%${search}%`, createdBy, limit, offset]
+    const { rows } = await db.query(query, values)
+    return {
+        rows,
+        pageInfo: {
+            totalData: countRows[0].count,
+            page: page,
+            limit: limit,
+            totalPage: Math.ceil(countRows[0].count / limit),
+        },
+    }
 }
 
 exports.findOneByUserId = async function(id, createdBy){
