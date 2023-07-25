@@ -8,7 +8,7 @@ const app = express()
 app.use(express.urlencoded({extended: false}))
 
 app.use(cors({
-    origin: "http://localhost:8888",
+    origin: "https://tixevent.netlify.app",
     optionalSuccessStatus: 200
 }))
 
