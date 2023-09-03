@@ -55,19 +55,8 @@ Jika Anda ingin menjalankan Tix Event Backend di lingkungan pengembangan lokal A
 
 5. Server backend akan berjalan di [http://localhost:8888](http://localhost:8888).
 
-## Kontribusi
-
-Kami sangat terbuka terhadap kontribusi! Jika Anda ingin berkontribusi pada pengembangan Tix Event Backend, silakan buat _fork_ repositori ini dan kirim _pull request_ setelah melakukan perubahan yang dibutuhkan.
-
-## Laporan Masalah
-
-Jika Anda menemukan masalah atau bug dalam backend aplikasi, harap buat _issue_ di repositori ini atau hubungi tim pengembangan kami di [email@example.com](mailto:email@example.com).
-
-## Lisensi
-
-Aplikasi Tix Event Backend dilisensikan di bawah Lisensi MIT. Lihat berkas [LICENSE](LICENSE) untuk detailnya.
 
 Terima kasih telah menggunakan Tix Event Backend! Kami berharap Anda menikmati pengalaman menggunakan aplikasi Tix Event.
 
 ---
-© 2023 Tix Event. Dikembangkan oleh [Nama Perusahaan Anda](https://www.example.com).
+© 2023 Tix Event. Dikembangkan oleh Putu Bagus Raditya.
